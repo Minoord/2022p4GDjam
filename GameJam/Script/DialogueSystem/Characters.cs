@@ -6,8 +6,15 @@ using System.Threading.Tasks;
 
 namespace GameJam
 {
-    class Class1
+    public enum Characters
     {
-       
+        Mario,
+        Luigi,
+        Peach,
+        Daisy,
+        Bowser,
+        Goom,
+        Ba,
+        Hammer_Bro
     }
 }
