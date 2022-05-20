@@ -12,7 +12,7 @@ namespace GameJam
     public partial class RenderForm : Form
     {
 
-
+        private InteractiveSystem interactiveSystem;
         private LevelLoader levelLoader;
         private float frametime;
         private GameRenderer renderer;
@@ -35,6 +35,8 @@ namespace GameJam
         }
         private void RenderForm_Load(object sender, EventArgs e)
         {
+            interactiveSystem = new InteractiveSystem();
+
             levelLoader = new LevelLoader(gc.tileSize, new FileLevelDataSource());
             levelLoader.LoadRooms(gc.spriteMap.GetMap());
 
@@ -75,6 +77,16 @@ namespace GameJam
             {
                 MovePlayer(1, 0);
             }
+
+            if (e.KeyCode == Keys.E)
+            {
+                interactiveSystem.Interact();
+            }
+        }
+
+        internal RectangleF GetPlayerLocation()
+        {
+            return gc.player.rectangle;
         }
 
         private void MovePlayer(int x, int y)
