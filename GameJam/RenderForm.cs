@@ -11,10 +11,11 @@ namespace GameJam
 
     public partial class RenderForm : Form
     {
-
-
-        private LevelLoader levelLoader;
         private float frametime;
+        private bool isSpeaking { get; set; }
+
+        private DialogueSystem _dialogueSystem;
+        private LevelLoader levelLoader;
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();
         public RenderForm()
@@ -74,6 +75,10 @@ namespace GameJam
             else if (e.KeyCode == Keys.D)
             {
                 MovePlayer(1, 0);
+            }
+            else if(e.KeyCode == Keys.Enter || isSpeaking)
+            {
+                _dialogueSystem.NextDialogue();
             }
         }
 
