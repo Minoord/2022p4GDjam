@@ -16,6 +16,10 @@ namespace GameJam
         private InteractiveSystem interactiveSystem;
         private LevelLoader levelLoader;
         private float frametime;
+        private bool isSpeaking { get; set; }
+
+        private DialogueSystem _dialogueSystem;
+        private LevelLoader levelLoader;
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();
         public RenderForm()
@@ -58,6 +62,12 @@ namespace GameJam
                 (gc.tileSize * gc.room.tiles[0].Length) * gc.scaleunit,
                 (gc.tileSize * gc.room.tiles.Length) * gc.scaleunit
                 );
+
+            gc.dialougue = new RenderObject()
+            {
+                frames = gc.spriteMap.GetDialoguePosition(),
+                rectangle = new Rectangle(0, 80, 160, 40),
+            };
         }
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
@@ -77,6 +87,10 @@ namespace GameJam
             else if (e.KeyCode == Keys.D)
             {
                 MovePlayer(1, 0);
+            }
+            else if(e.KeyCode == Keys.Enter || isSpeaking)
+            {
+                _dialogueSystem.NextDialogue();
             }
 
             if (e.KeyCode == Keys.E)
@@ -152,6 +166,11 @@ namespace GameJam
         {
             base.OnPaint(e);
             renderer.Render(e, frametime);
+        }
+
+        private void RenderForm_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 
