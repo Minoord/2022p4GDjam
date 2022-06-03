@@ -47,8 +47,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Game\SpriteMap.cs" />
-    <Compile Include="Script\DialogueSystem\Class1.cs" />
-    <Compile Include="Script\InteractiveSystem\InteractiveSystem.cs" />
+    <Compile Include="Script\DialogueSystem\Characters.cs" />
+    <Compile Include="Script\DialogueSystem\DialogueSystem.cs" />
     <Compile Include="Tools\FileLevelDataSource.cs" />
     <Compile Include="Game\GameContext.cs" />
     <Compile Include="Game\GameRenderer.cs" />
