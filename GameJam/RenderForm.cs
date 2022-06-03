@@ -56,6 +56,12 @@ namespace GameJam
                 (gc.tileSize * gc.room.tiles[0].Length) * gc.scaleunit,
                 (gc.tileSize * gc.room.tiles.Length) * gc.scaleunit
                 );
+
+            gc.dialougue = new RenderObject()
+            {
+                frames = gc.spriteMap.GetDialoguePosition(),
+                rectangle = new Rectangle(0, 80, 160, 40),
+            };
         }
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
@@ -122,6 +128,11 @@ namespace GameJam
         {
             base.OnPaint(e);
             renderer.Render(e, frametime);
+        }
+
+        private void RenderForm_Load_1(object sender, EventArgs e)
+        {
+
         }
     }
 

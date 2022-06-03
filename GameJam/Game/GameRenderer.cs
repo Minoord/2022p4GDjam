@@ -11,6 +11,12 @@ namespace GameJam.Game
         private float frametime;
         private readonly Image image;
 
+        private Font font = new Font(FontFamily.GenericMonospace, 5); 
+        private SolidBrush colourBrush = new SolidBrush(Color.White);
+
+        private Rectangle rectangle = new Rectangle(0,80,160,40);
+        public bool isRenderingDialogue = true;
+
         public GameRenderer(GameContext context)
         {
             this.context = context;
@@ -39,6 +45,9 @@ namespace GameJam.Game
             Graphics g = InitGraphics(e);
             RenderRoom(g);
             RenderObject(g, context.player);
+            if (!isRenderingDialogue) return;
+            RenderObject(g, context.dialougue);
+            RenderDialogue(g, "Works!");
         }
 
         private void RenderRoom(Graphics g)
@@ -56,6 +65,12 @@ namespace GameJam.Game
         {
             g.DrawImage(image, renderObject.rectangle, renderObject.frames[(int)renderObject.frame], GraphicsUnit.Pixel);
             renderObject.MoveFrame(frametime);
+        }
+
+        private void RenderDialogue(Graphics g, string dialogue)
+        {
+            g.DrawString(dialogue, font, colourBrush , new Point(15,100));
+            //g.FillRectangle(new SolidBrush(Color.Black), rectangle);
         }
 
         public void Dispose()
