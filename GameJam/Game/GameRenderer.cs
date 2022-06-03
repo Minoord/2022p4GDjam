@@ -14,7 +14,6 @@ namespace GameJam.Game
         private Font font = new Font(FontFamily.GenericMonospace, 5); 
         private SolidBrush colourBrush = new SolidBrush(Color.White);
 
-        private Rectangle rectangle = new Rectangle(0,80,160,40);
         public bool isRenderingDialogue = true;
 
         public GameRenderer(GameContext context)
@@ -69,8 +68,8 @@ namespace GameJam.Game
 
         private void RenderDialogue(Graphics g, string dialogue)
         {
-            g.DrawString(dialogue, font, colourBrush , new Point(15,100));
-            //g.FillRectangle(new SolidBrush(Color.Black), rectangle);
+            g.DrawString(dialogue, font, colourBrush , new Point(15,90));
+ 
         }
 
         public void Dispose()
