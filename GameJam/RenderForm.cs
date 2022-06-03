@@ -19,7 +19,6 @@ namespace GameJam
         private bool isSpeaking { get; set; }
 
         private DialogueSystem _dialogueSystem;
-        private LevelLoader levelLoader;
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();
         public RenderForm()
