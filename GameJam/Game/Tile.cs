@@ -8,6 +8,8 @@ namespace GameJam.Game
         public Rectangle sprite;
         public float frame;
         internal Rectangle rectangle;
+
+        internal bool occupied;
     }
 }
 

@@ -1,6 +1,7 @@
 using GameJam.Game;
 using GameJam.Tools;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace GameJam
 
     public partial class RenderForm : Form
     {
+
+        private InteractiveSystem interactiveSystem;
+        private LevelLoader levelLoader;
         private float frametime;
         private bool isSpeaking { get; set; }
 
@@ -36,6 +40,8 @@ namespace GameJam
         }
         private void RenderForm_Load(object sender, EventArgs e)
         {
+            interactiveSystem = new InteractiveSystem(this);
+
             levelLoader = new LevelLoader(gc.tileSize, new FileLevelDataSource());
             levelLoader.LoadRooms(gc.spriteMap.GetMap());
 
@@ -86,6 +92,21 @@ namespace GameJam
             {
                 _dialogueSystem.NextDialogue();
             }
+
+            if (e.KeyCode == Keys.E)
+            {
+                interactiveSystem.Interact();
+            }
+        }
+
+        internal RectangleF GetPlayerLocation()
+        {
+            return gc.player.rectangle;
+        }
+
+        internal Room GetRoom()
+        {
+            return gc.room;
         }
 
         private void MovePlayer(int x, int y)
@@ -100,24 +121,41 @@ namespace GameJam
             {
                 if (next.graphic == 'D')
                 {
-                    gc.room = levelLoader.GetRoom(gc.room.roomx + x, gc.room.roomy + y);
-
-                    if (y != 0)
-                    {
-                        player.rectangle.Y += -y * ((gc.room.tiles.Length - 2) * gc.tileSize);
-                    }
-                    else
-                    {
-                        player.rectangle.X += -x * ((gc.room.tiles[0].Length - 2) * gc.tileSize);
-                    }
+                    EnterRoom(x, y, player);
                 }
 
                 else if (next.graphic != '#')
                 {
-                    player.rectangle.X = newx;
-                    player.rectangle.Y = newy;
+                    if (next.graphic == '*')
+                    {
+                        Dictionary<char, Rectangle> map = gc.spriteMap.GetMap();
+                        next.graphic = '.';
+                        next.sprite = map[next.graphic];
+                        interactiveSystem.PickUp("Yes");
+                    }
+                    MoveSprite(newx, newy, player);
                 }
             }
+        }
+
+        internal void EnterRoom(int x, int y, RenderObject player)
+        {
+            gc.room = levelLoader.GetRoom(gc.room.roomx + x, gc.room.roomy + y);
+
+            if (y != 0)
+            {
+                player.rectangle.Y += -y * ((gc.room.tiles.Length - 2) * gc.tileSize);
+            }
+            else
+            {
+                player.rectangle.X += -x * ((gc.room.tiles[0].Length - 2) * gc.tileSize);
+            }
+        }
+
+        internal void MoveSprite(float newx, float newy, RenderObject player)
+        {
+            player.rectangle.X = newx;
+            player.rectangle.Y = newy;
         }
 
         public void Logic(float frametime)
