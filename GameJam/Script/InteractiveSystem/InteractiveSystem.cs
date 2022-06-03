@@ -10,16 +10,29 @@ namespace GameJam
 {
     class InteractiveSystem
     {
-        internal bool isInRange;
+        internal RenderForm renderForm;
 
-        internal bool CanInteract
+        public InteractiveSystem(RenderForm renderForm)
         {
-            get => isInRange;
+            this.renderForm = renderForm;
         }
+
+        internal bool isInRange = true;
+
+        internal bool canInteract = true;
 
         internal void Interact()
         {
-            if (!CanInteract) return;
+            if (!canInteract) return;
+            Console.WriteLine(renderForm.GetPlayerLocation());
+            Console.WriteLine(renderForm.GetRoom().roomx);
+            Console.WriteLine(renderForm.GetRoom().roomy);
+        }
+
+        internal void PickUp(string item)
+        {
+            Console.WriteLine(item);
+            // Add to Database inventory
         }
     }
 }
