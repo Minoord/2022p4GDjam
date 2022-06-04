@@ -12,12 +12,14 @@ namespace GameJam.Game
 
         internal SpriteMap()
         {
-
             tileMap.Add('#', new Rectangle(45, 75, 16, 16));
             tileMap.Add('.', new Rectangle(23, 75, 16, 16));
             tileMap.Add('D', new Rectangle(2, 75, 16, 16));
             tileMap.Add('!', new Rectangle(66, 75, 16, 16));
             tileMap.Add('*', new Rectangle(86, 75, 16, 16));
+            tileMap.Add('B', new Rectangle(86, 75, 16, 16));
+            tileMap.Add('L', new Rectangle(86, 75, 16, 16));
+            tileMap.Add('Y', new Rectangle(86, 75, 16, 16));
 
             playerAnimation = new Rectangle[]
                 {

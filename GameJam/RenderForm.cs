@@ -18,6 +18,8 @@ namespace GameJam
         private float frametime;
         private bool isSpeaking { get; set; }
 
+        private bool tryInteraction;
+
         private DialogueSystem _dialogueSystem;
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();
@@ -91,11 +93,6 @@ namespace GameJam
             {
                 _dialogueSystem.NextDialogue();
             }
-
-            if (e.KeyCode == Keys.E)
-            {
-                interactiveSystem.Interact();
-            }
         }
 
         internal RectangleF GetPlayerLocation()
@@ -116,6 +113,7 @@ namespace GameJam
 
             Tile next = gc.room.tiles.SelectMany(ty => ty.Where(tx => tx.rectangle.Contains((int)newx, (int)newy))).FirstOrDefault();
 
+            bool isChar = interactiveSystem.charList.Contains(next.graphic);
             if (next != null)
             {
                 if (next.graphic == 'D')
@@ -123,8 +121,10 @@ namespace GameJam
                     EnterRoom(x, y, player);
                 }
 
-                else if (next.graphic != '#')
+                else if (next.graphic != '#' && !isChar)//next.graphic != '+')
                 {
+                    interactiveSystem.IsInRange(false);
+                    MoveSprite(newx, newy, player);
                     if (next.graphic == '*')
                     {
                         Dictionary<char, Rectangle> map = gc.spriteMap.GetMap();
@@ -132,7 +132,11 @@ namespace GameJam
                         next.sprite = map[next.graphic];
                         interactiveSystem.PickUp("Yes");
                     }
-                    MoveSprite(newx, newy, player);
+                }
+                else if (isChar)
+                {
+                    interactiveSystem.IsInRange(true);
+                    interactiveSystem.Interact(next.graphic);
                 }
             }
         }
