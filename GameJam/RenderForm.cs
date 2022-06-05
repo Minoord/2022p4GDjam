@@ -14,6 +14,8 @@ namespace GameJam
     {
 
         private InteractiveSystem interactiveSystem;
+        private WorldItems worldItems;
+        private Inventory inventory;
         private LevelLoader levelLoader;
         private float frametime;
         private bool isSpeaking { get; set; }
@@ -39,7 +41,9 @@ namespace GameJam
         }
         private void RenderForm_Load(object sender, EventArgs e)
         {
-            interactiveSystem = new InteractiveSystem(this);
+            //worldItems = new WorldItems();
+            inventory = new Inventory();
+            interactiveSystem = new InteractiveSystem(this, inventory);
 
             levelLoader = new LevelLoader(gc.tileSize, new FileLevelDataSource());
             levelLoader.LoadRooms(gc.spriteMap.GetMap());

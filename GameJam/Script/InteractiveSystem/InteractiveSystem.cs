@@ -11,10 +11,12 @@ namespace GameJam
     class InteractiveSystem
     {
         internal RenderForm renderForm;
+        internal Inventory inventory;
 
-        public InteractiveSystem(RenderForm renderForm)
+        public InteractiveSystem(RenderForm renderForm, Inventory inventory)
         {
             this.renderForm = renderForm;
+            this.inventory = inventory;
         }
 
         internal bool isInRange = true;
@@ -31,8 +33,8 @@ namespace GameJam
 
         internal void PickUp(string item)
         {
+            //inventory.AddItem(item);
             Console.WriteLine(item);
-            // Add to Database inventory
         }
     }
 }
