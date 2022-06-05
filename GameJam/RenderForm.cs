@@ -14,11 +14,11 @@ namespace GameJam
     {
 
         private InteractiveSystem interactiveSystem;
+        private World world;
+        private Inventory inventory;
         private LevelLoader levelLoader;
         private float frametime;
         private bool isSpeaking { get; set; }
-
-        private bool tryInteraction;
 
         private DialogueSystem _dialogueSystem;
         private GameRenderer renderer;
@@ -41,7 +41,9 @@ namespace GameJam
         }
         private void RenderForm_Load(object sender, EventArgs e)
         {
-            interactiveSystem = new InteractiveSystem(this);
+            inventory = new Inventory();
+            world = new World();
+            interactiveSystem = new InteractiveSystem(this, inventory, world);
 
             levelLoader = new LevelLoader(gc.tileSize, new FileLevelDataSource());
             levelLoader.LoadRooms(gc.spriteMap.GetMap());
@@ -93,6 +95,10 @@ namespace GameJam
             {
                 _dialogueSystem.NextDialogue();
             }
+            if (e.KeyCode == Keys.E)
+            {
+                inventory.PrintAllItems();
+            }
         }
 
         internal RectangleF GetPlayerLocation()
@@ -113,7 +119,8 @@ namespace GameJam
 
             Tile next = gc.room.tiles.SelectMany(ty => ty.Where(tx => tx.rectangle.Contains((int)newx, (int)newy))).FirstOrDefault();
 
-            bool isChar = interactiveSystem.charList.Contains(next.graphic);
+            bool isChar = world.characters.ContainsKey(next.graphic);
+            bool isItem = world.worldItems.ContainsKey(next.graphic);
             if (next != null)
             {
                 if (next.graphic == 'D')
@@ -125,12 +132,13 @@ namespace GameJam
                 {
                     interactiveSystem.IsInRange(false);
                     MoveSprite(newx, newy, player);
-                    if (next.graphic == '*')
+                    if (isItem)
                     {
+                        interactiveSystem.PickUp(next.graphic);
+
                         Dictionary<char, Rectangle> map = gc.spriteMap.GetMap();
                         next.graphic = '.';
                         next.sprite = map[next.graphic];
-                        interactiveSystem.PickUp("Yes");
                     }
                 }
                 else if (isChar)
