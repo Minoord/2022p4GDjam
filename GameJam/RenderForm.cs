@@ -20,8 +20,6 @@ namespace GameJam
         private float frametime;
         private bool isSpeaking { get; set; }
 
-        private bool tryInteraction;
-
         private DialogueSystem _dialogueSystem;
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();

@@ -26,7 +26,7 @@ namespace GameJam.Game
             // Characters Begin
             tileMap.Add('B', new Rectangle(86, 75, 16, 16));
             tileMap.Add('L', new Rectangle(86, 75, 16, 16));
-            tileMap.Add('Y', new Rectangle(86, 75, 16, 16));
+            tileMap.Add('H', new Rectangle(86, 75, 16, 16));
             // Characters End
 
             playerAnimation = new Rectangle[]
