@@ -12,10 +12,11 @@ namespace GameJam
 
         internal void PrintAllItems()
         {
+            Console.WriteLine("Your inventory includes: ");
             foreach (var item in inventory)
             {
-                Console.WriteLine(item.Value.name);
-                Console.WriteLine(item.Value.description);
+                Console.WriteLine("- " + item.Value.name);
+                Console.WriteLine("  " + item.Value.description);
             }
         }
 
