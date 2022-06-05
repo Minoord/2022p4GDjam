@@ -19,7 +19,7 @@ namespace GameJam
 
             characters.Add('B', new Character("Bowser"));
             characters.Add('L', new Character("Luigi"));
-            characters.Add('Y', new Character("Yoshi"));
+            characters.Add('H', new Character("Hammer Bro"));
         }
     }
 }
