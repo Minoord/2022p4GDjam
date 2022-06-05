@@ -12,15 +12,14 @@ namespace GameJam
     class InteractiveSystem
     {
         internal RenderForm renderForm;
-        internal List<char> charList = new List<char>();
+        internal World world;
+        internal Inventory inventory;
 
-        public InteractiveSystem(RenderForm renderForm)
+        public InteractiveSystem(RenderForm renderForm, Inventory inventory, World world)
         {
             this.renderForm = renderForm;
-
-            charList.Add('B');
-            charList.Add('L');
-            charList.Add('Y');
+            this.inventory = inventory;
+            this.world = world;
         }
 
         private bool isInRange;
@@ -33,16 +32,26 @@ namespace GameJam
         internal void Interact(char c)
         {
             if (!isInRange) return;
-            Console.WriteLine(c);
-            Console.WriteLine(renderForm.GetPlayerLocation());
-            Console.WriteLine(renderForm.GetRoom().roomx);
-            Console.WriteLine(renderForm.GetRoom().roomy);
+            Character character = new Character("");
+            world.characters.TryGetValue(c, out character);
+
+            // Call Dialogue System here
+
+            // Mark Debug Begin
+            Console.WriteLine(character.name);
+            // Mark Debug End
         }
 
-        internal void PickUp(string item)
+        internal void PickUp(char itemChar)
         {
-            Console.WriteLine(item);
-            // Add to Database inventory
+            Item item = new Item("", "");
+            world.worldItems.TryGetValue(itemChar, out item);
+            inventory.AddItem(item);
+
+            // Mark Debug Begin
+            //Console.WriteLine(item.name);
+            //Console.WriteLine(item.description);
+            // Mark Debug End
         }
     }
 }

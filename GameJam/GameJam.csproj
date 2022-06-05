@@ -49,7 +49,12 @@
     <Compile Include="Game\SpriteMap.cs" />
     <Compile Include="Script\DialogueSystem\Characters.cs" />
     <Compile Include="Script\DialogueSystem\DialogueSystem.cs" />
+    <Compile Include="Script\InteractiveSystem\Character.cs" />
     <Compile Include="Script\InteractiveSystem\InteractiveSystem.cs" />
+    <Compile Include="Script\InteractiveSystem\Object.cs" />
+    <Compile Include="Script\Inventory\Inventory.cs" />
+    <Compile Include="Script\Inventory\Item.cs" />
+    <Compile Include="Script\Inventory\World.cs" />
     <Compile Include="Tools\FileLevelDataSource.cs" />
     <Compile Include="Game\GameContext.cs" />
     <Compile Include="Game\GameRenderer.cs" />

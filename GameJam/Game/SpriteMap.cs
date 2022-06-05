@@ -16,10 +16,18 @@ namespace GameJam.Game
             tileMap.Add('.', new Rectangle(23, 75, 16, 16));
             tileMap.Add('D', new Rectangle(2, 75, 16, 16));
             tileMap.Add('!', new Rectangle(66, 75, 16, 16));
-            tileMap.Add('*', new Rectangle(86, 75, 16, 16));
+
+            // Items Begin
+            tileMap.Add('/', new Rectangle(86, 75, 16, 16));
+            tileMap.Add('0', new Rectangle(86, 75, 16, 16));
+            tileMap.Add('>', new Rectangle(86, 75, 16, 16));
+            // Items End
+
+            // Characters Begin
             tileMap.Add('B', new Rectangle(86, 75, 16, 16));
             tileMap.Add('L', new Rectangle(86, 75, 16, 16));
             tileMap.Add('Y', new Rectangle(86, 75, 16, 16));
+            // Characters End
 
             playerAnimation = new Rectangle[]
                 {

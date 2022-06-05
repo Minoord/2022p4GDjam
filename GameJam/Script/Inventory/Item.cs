@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace GameJam
 {
-    class Item
+    class Item : Object
     {
-        internal string name;
+        internal string description;
 
-        public Item(string name)
+        public Item(string name, string description) : base(name)
         {
-            this.name = name;
+            this.description = description;
         }
     }
 }

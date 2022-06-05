@@ -10,9 +10,13 @@ namespace GameJam
     {
         internal Dictionary<string, Item> inventory = new Dictionary<string, Item>();
 
-        public Inventory()
+        internal void PrintAllItems()
         {
-            
+            foreach (var item in inventory)
+            {
+                Console.WriteLine(item.Value.name);
+                Console.WriteLine(item.Value.description);
+            }
         }
 
         internal void AddItem(Item item)
