@@ -5,27 +5,35 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using System.Collections.Generic;
 
 namespace GameJam
 {
     class InteractiveSystem
     {
         internal RenderForm renderForm;
-        internal Inventory inventory;
+        internal List<char> charList = new List<char>();
 
-        public InteractiveSystem(RenderForm renderForm, Inventory inventory)
+        public InteractiveSystem(RenderForm renderForm)
         {
             this.renderForm = renderForm;
-            this.inventory = inventory;
+
+            charList.Add('B');
+            charList.Add('L');
+            charList.Add('Y');
         }
 
-        internal bool isInRange = true;
+        private bool isInRange;
 
-        internal bool canInteract = true;
-
-        internal void Interact()
+        internal bool IsInRange(bool isInRange)
         {
-            if (!canInteract) return;
+            return this.isInRange = isInRange;
+        }
+
+        internal void Interact(char c)
+        {
+            if (!isInRange) return;
+            Console.WriteLine(c);
             Console.WriteLine(renderForm.GetPlayerLocation());
             Console.WriteLine(renderForm.GetRoom().roomx);
             Console.WriteLine(renderForm.GetRoom().roomy);
@@ -33,8 +41,8 @@ namespace GameJam
 
         internal void PickUp(string item)
         {
-            //inventory.AddItem(item);
             Console.WriteLine(item);
+            // Add to Database inventory
         }
     }
 }
