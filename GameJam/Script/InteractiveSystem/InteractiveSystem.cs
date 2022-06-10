@@ -25,26 +25,18 @@ namespace GameJam
 
         internal void Interact(char c)
         {
-            var test = world.characters[c];
+            Characters character = world.characters[c];
 
-            // Call Dialogue System here
-            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(test);
+            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
             renderForm.PlayDialogue(); 
-
-            // Mark Debug Begin
-            Console.WriteLine(test);
-            // Mark Debug End
         }
 
-        internal void PickUp(char itemChar)
+        internal void PickUp(char c)
         {
-            Item item = new Item("", "");
-            world.worldItems.TryGetValue(itemChar, out item);
-            inventory.AddItem(item);
+            inventory.AddItem(world.worldItems[c]);
 
             // Mark Debug Begin
-            Console.WriteLine("Added " + item.name + " to inventory.");
-            //Console.WriteLine(item.description);
+            Console.WriteLine("Added " + c + " to inventory.");
             // Mark Debug End
         }
     }

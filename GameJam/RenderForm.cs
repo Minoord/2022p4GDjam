@@ -139,15 +139,15 @@ namespace GameJam
             tx.rectangle.Contains((int)player.rectangle.X, (int)newBottom))
             &&
             world.characters.ContainsKey(tx.graphic)
-            ))
-                .FirstOrDefault();
-            if (next == null) return;
+            )).FirstOrDefault();
 
+            if (next == null) return;
             interactiveSystem.Interact(next.graphic);
         }
 
         private void MovePlayer(int x, int y)
         {
+            if (renderer.isRenderingDialogue) return;
             RenderObject player = gc.player;
             float newx = player.rectangle.X + (x * gc.tileSize);
             float newy = player.rectangle.Y + (y * gc.tileSize);
