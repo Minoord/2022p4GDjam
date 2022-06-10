@@ -14,6 +14,7 @@ namespace GameJam
         internal RenderForm renderForm;
         internal World world;
         internal Inventory inventory;
+        public DialogueLibrary dialogueLibrary = new DialogueLibrary();
 
         public InteractiveSystem(RenderForm renderForm, Inventory inventory, World world)
         {
@@ -27,6 +28,8 @@ namespace GameJam
             var test = world.characters[c];
 
             // Call Dialogue System here
+            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(test);
+            renderForm.PlayDialogue(); 
 
             // Mark Debug Begin
             Console.WriteLine(test);
