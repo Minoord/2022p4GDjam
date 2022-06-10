@@ -28,15 +28,17 @@ namespace GameJam
             Characters character = world.characters[c];
 
             renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
-            renderForm.PlayDialogue(); 
+            renderForm.PlayDialogue();
         }
 
         internal void PickUp(char c)
         {
+            string itemName = world.worldItems[c].name;
+
             inventory.AddItem(world.worldItems[c]);
 
             // Mark Debug Begin
-            Console.WriteLine("Added " + c + " to inventory.");
+            Console.WriteLine("Added " + itemName + " to inventory.");
             // Mark Debug End
         }
     }
