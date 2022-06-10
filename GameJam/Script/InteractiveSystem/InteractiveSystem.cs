@@ -31,14 +31,12 @@ namespace GameJam
 
         internal void Interact(char c)
         {
-            if (!isInRange) return;
-            Character character = new Character("");
-            world.characters.TryGetValue(c, out character);
+            var test = world.characters[c];
 
             // Call Dialogue System here
 
             // Mark Debug Begin
-            Console.WriteLine(character.name);
+            Console.WriteLine(test);
             // Mark Debug End
         }
 

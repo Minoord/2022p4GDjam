@@ -93,7 +93,7 @@ namespace GameJam
             {
                 MovePlayer(1, 0);
             }
-            else if(e.KeyCode == Keys.Enter || isSpeaking)
+            else if (e.KeyCode == Keys.Enter || isSpeaking)
             {
                 if(dialogueSystem == null) dialogueSystem = dialogueLibrary.BeginDialogue();
                 renderer.isRenderingDialogue = true;
@@ -101,7 +101,8 @@ namespace GameJam
             }
             if (e.KeyCode == Keys.E)
             {
-                inventory.PrintAllItems();
+                //inventory.PrintAllItems();
+                CheckTiles();
             }
         }
 
@@ -113,6 +114,28 @@ namespace GameJam
         internal Room GetRoom()
         {
             return gc.room;
+        }
+
+        private void CheckTiles()
+        {
+            RenderObject player = gc.player;
+            float newRight = player.rectangle.X + gc.tileSize;
+            float newLeft = player.rectangle.X - gc.tileSize;
+            float newTop = player.rectangle.Y - gc.tileSize;
+            float newBottom = player.rectangle.Y + gc.tileSize;
+
+            Tile next = gc.room.tiles.SelectMany(ty => ty.Where(tx =>
+            (tx.rectangle.Contains((int)newRight, (int)player.rectangle.Y) ||
+            tx.rectangle.Contains((int)newLeft, (int)player.rectangle.Y) ||
+            tx.rectangle.Contains((int)player.rectangle.X, (int)newTop) ||
+            tx.rectangle.Contains((int)player.rectangle.X, (int)newBottom))
+            &&
+            world.characters.ContainsKey(tx.graphic)
+            ))
+                .FirstOrDefault();
+            if (next == null) return;
+
+            interactiveSystem.Interact(next.graphic);
         }
 
         private void MovePlayer(int x, int y)
@@ -132,9 +155,8 @@ namespace GameJam
                     EnterRoom(x, y, player);
                 }
 
-                else if (next.graphic != '#' && !isChar)//next.graphic != '+')
+                else if (next.graphic != '#' && !isChar)
                 {
-                    interactiveSystem.IsInRange(false);
                     MoveSprite(newx, newy, player);
                     if (isItem)
                     {
@@ -144,11 +166,6 @@ namespace GameJam
                         next.graphic = '.';
                         next.sprite = map[next.graphic];
                     }
-                }
-                else if (isChar)
-                {
-                    interactiveSystem.IsInRange(true);
-                    interactiveSystem.Interact(next.graphic);
                 }
             }
         }
