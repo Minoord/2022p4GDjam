@@ -40,7 +40,7 @@ namespace GameJam
             inventory.AddItem(item);
 
             // Mark Debug Begin
-            //Console.WriteLine(item.name);
+            Console.WriteLine("Added " + item.name + " to inventory.");
             //Console.WriteLine(item.description);
             // Mark Debug End
         }

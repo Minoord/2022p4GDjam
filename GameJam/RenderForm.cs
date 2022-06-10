@@ -97,8 +97,11 @@ namespace GameJam
             }
             if (e.KeyCode == Keys.E)
             {
-                //inventory.PrintAllItems();
                 CheckTiles();
+            }
+            if (e.KeyCode == Keys.I)
+            {
+                inventory.PrintAllItems();
             }
         }
 
