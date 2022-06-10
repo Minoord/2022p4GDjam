@@ -20,9 +20,11 @@ namespace GameJam
         private float frametime;
         private bool isSpeaking { get; set; }
 
-        private DialogueSystem _dialogueSystem;
+        public DialogueLibrary dialogueLibrary = new DialogueLibrary();
+        public DialogueSystem dialogueSystem;
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();
+
         public RenderForm()
         {
             InitializeComponent();
@@ -93,13 +95,20 @@ namespace GameJam
             }
             else if (e.KeyCode == Keys.Enter || isSpeaking)
             {
-                _dialogueSystem.NextDialogue();
+                PlayDialogue();
             }
             if (e.KeyCode == Keys.E)
             {
                 //inventory.PrintAllItems();
                 CheckTiles();
             }
+        }
+
+        public void PlayDialogue()
+        {
+            if (dialogueSystem == null) return;
+            renderer.isRenderingDialogue = true;
+            renderer.dialogue = dialogueSystem.NextDialogue();
         }
 
         internal RectangleF GetPlayerLocation()
