@@ -17,8 +17,7 @@ namespace GameJam.Game
         public DialogueSystem dialogueSystem;
         public string dialogue;
 
-        public bool isRenderingDialogue = false;
-        public bool nextDialogue = false;
+        public bool isRenderingDialogue;
 
         public GameRenderer(GameContext context)
         {
