@@ -52,7 +52,7 @@ namespace GameJam
 
             gc.room = levelLoader.GetRoom(0, 0);
 
-            gc.player = new RenderObject()
+            gc.player = new RenderObject() // MARK HIER WORD PLAYER GERENDERED
             {
                 frames = gc.spriteMap.GetPlayerFrames(),
                 rectangle = new Rectangle(2 * gc.tileSize, 2 * gc.tileSize, gc.tileSize, gc.tileSize),
