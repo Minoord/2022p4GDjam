@@ -14,7 +14,11 @@ namespace GameJam.Game
         private Font font = new Font(FontFamily.GenericMonospace, 5); 
         private SolidBrush colourBrush = new SolidBrush(Color.White);
 
-        public bool isRenderingDialogue = true;
+        public DialogueSystem dialogueSystem;
+        public string dialogue;
+
+        public bool isRenderingDialogue = false;
+        public bool nextDialogue = false;
 
         public GameRenderer(GameContext context)
         {
@@ -44,9 +48,11 @@ namespace GameJam.Game
             Graphics g = InitGraphics(e);
             RenderRoom(g);
             RenderObject(g, context.player);
+
+            if (dialogue == null) isRenderingDialogue = false;
             if (!isRenderingDialogue) return;
             RenderObject(g, context.dialougue);
-            RenderDialogue(g, "Works!");
+            RenderDialogue(g, dialogue);
         }
 
         private void RenderRoom(Graphics g)
@@ -69,7 +75,6 @@ namespace GameJam.Game
         private void RenderDialogue(Graphics g, string dialogue)
         {
             g.DrawString(dialogue, font, colourBrush , new Point(15,90));
- 
         }
 
         public void Dispose()

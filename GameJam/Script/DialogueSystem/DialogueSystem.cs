@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameJam
+namespace GameJam.Game
 {
-    class DialogueSystem
+    public class DialogueSystem
     {
         private int lineNumber = -1; 
         private Dictionary<string, Characters> _dialogueSpeaker = new Dictionary<string, Characters>();
-        private List<string> _dialogue = new List<string>();
+        public List<string> _dialogue = new List<string>();
 
         public void AddDialogue(string text, Characters talkingCharachter)
         {
@@ -36,8 +36,17 @@ namespace GameJam
 
         public string NextDialogue()
         {
+            Console.WriteLine(_dialogue.Count + ":" + lineNumber);
             lineNumber += 1;
+            if (lineNumber >= _dialogue.Count)
+            {
+                Console.WriteLine("canceld");
+                DeleteDialogue();
+                lineNumber = -1;
+                return null;
+            }
             return _dialogue[lineNumber];
+           
         }
 
 
