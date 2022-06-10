@@ -22,13 +22,6 @@ namespace GameJam
             this.world = world;
         }
 
-        private bool isInRange;
-
-        internal bool IsInRange(bool isInRange)
-        {
-            return this.isInRange = isInRange;
-        }
-
         internal void Interact(char c)
         {
             var test = world.characters[c];
