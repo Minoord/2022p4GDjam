@@ -95,15 +95,20 @@ namespace GameJam
             }
             else if (e.KeyCode == Keys.Enter || isSpeaking)
             {
-                if(dialogueSystem == null) dialogueSystem = dialogueLibrary.BeginDialogue();
-                renderer.isRenderingDialogue = true;
-                renderer.dialogue = dialogueSystem.NextDialogue();
+                PlayDialogue();
             }
             if (e.KeyCode == Keys.E)
             {
                 //inventory.PrintAllItems();
                 CheckTiles();
             }
+        }
+
+        public void PlayDialogue()
+        {
+            if (dialogueSystem == null) return;
+            renderer.isRenderingDialogue = true;
+            renderer.dialogue = dialogueSystem.NextDialogue();
         }
 
         internal RectangleF GetPlayerLocation()
