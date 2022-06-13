@@ -14,6 +14,7 @@ namespace GameJam
         internal RenderForm renderForm;
         internal World world;
         internal Inventory inventory;
+        public DialogueLibrary dialogueLibrary = new DialogueLibrary();
 
         public InteractiveSystem(RenderForm renderForm, Inventory inventory, World world)
         {
@@ -24,24 +25,20 @@ namespace GameJam
 
         internal void Interact(char c)
         {
-            var test = world.characters[c];
+            Characters character = world.characters[c];
 
-            // Call Dialogue System here
-
-            // Mark Debug Begin
-            Console.WriteLine(test);
-            // Mark Debug End
+            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
+            renderForm.PlayDialogue();
         }
 
-        internal void PickUp(char itemChar)
+        internal void PickUp(char c)
         {
-            Item item = new Item("", "");
-            world.worldItems.TryGetValue(itemChar, out item);
-            inventory.AddItem(item);
+            string itemName = world.worldItems[c].name;
+
+            inventory.AddItem(world.worldItems[c]);
 
             // Mark Debug Begin
-            Console.WriteLine("Added " + item.name + " to inventory.");
-            //Console.WriteLine(item.description);
+            Console.WriteLine("Added " + itemName + " to inventory.");
             // Mark Debug End
         }
     }
