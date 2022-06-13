@@ -41,6 +41,12 @@ namespace GameJam
             {
                 renderForm.menuDialogueItems.Add(item.Key);
             }
+            foreach (var chara in world.characters)
+            {
+                var charName = chara.Value.ToString();
+                bool isShroomlock = charName == "Shroomlock";
+               if (!isShroomlock) renderForm.menuDialogueChar.Add(charName);
+            }
 
             // Mark Debug Begin
             Console.WriteLine(test);

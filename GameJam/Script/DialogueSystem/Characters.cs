@@ -15,6 +15,7 @@ namespace GameJam
         Bowser,
         Goom,
         Ba,
-        Hammer_Bro
+        Hammer_Bro,
+        Shroomlock
     }
 }

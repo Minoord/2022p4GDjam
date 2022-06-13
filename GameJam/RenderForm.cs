@@ -19,6 +19,7 @@ namespace GameJam
         private LevelLoader levelLoader;
         private float frametime;
         private bool isSpeaking { get; set; }
+        private bool isInMenu { get; set; }
 
         public DialogueLibrary dialogueLibrary = new DialogueLibrary();
         public DialogueSystem dialogueSystem;
@@ -27,6 +28,9 @@ namespace GameJam
 
         public List<string> menuDialogueItems = new List<string>();
         public List<string> menuDialogueChar = new List<string>();
+
+        private string playersChoice;
+        private int playerChoiceNumber;
 
         public RenderForm()
         {
@@ -80,7 +84,7 @@ namespace GameJam
             gc.Menu = new RenderObject()
             {
                 frames = gc.spriteMap.GetDialoguePosition(),
-                rectangle = new Rectangle(112, 50, 50, 40),
+                rectangle = new Rectangle(112, 40, 50, 40),
             };
 
 
@@ -89,6 +93,7 @@ namespace GameJam
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
         {
+
             if (e.KeyCode == Keys.W)
             {
                 MovePlayer(0, -1);
@@ -105,9 +110,14 @@ namespace GameJam
             {
                 MovePlayer(1, 0);
             }
-            else if (e.KeyCode == Keys.Enter || isSpeaking)
+            else if (e.KeyCode == Keys.Enter || !isInMenu)
             {
                 PlayDialogue();
+            }
+
+            if (isInMenu)
+            {
+                inMenu(e);
             }
             if (e.KeyCode == Keys.E)
             {
@@ -116,31 +126,60 @@ namespace GameJam
             }
         }
 
+        public void inMenu(KeyEventArgs e)
+        {
+            Console.WriteLine(e.KeyCode);
+            if (e.KeyCode == Keys.I)
+            {
+                playersChoice = renderer.menuOptions[playerChoiceNumber];
+                //PlayDialogue();
+                isInMenu = false;
+            }
+            if (e.KeyCode == Keys.Up)
+            {
+                playerChoiceNumber -= 1;
+                if (playerChoiceNumber < 0) playerChoiceNumber = renderer.menuOptions.Count;
+            }
+            else if (e.KeyCode == Keys.Down)
+            {
+                playerChoiceNumber += 1;
+                if (playerChoiceNumber > renderer.menuOptions.Count) playerChoiceNumber = 0;
+            }
+        }
+
         public void PlayDialogue()
         {
             if (dialogueSystem == null) return;
             renderer.isRenderingDialogue = true;
             var dialogue = dialogueSystem.NextDialogue();
+            if (dialogue == null)
+            {
+                menuDialogueItems.Clear();
+                menuDialogueChar.Clear();
+            }
             if (dialogue == "MENU1")
             {
                 renderer.menuOptions = menuDialogueChar;
                 renderer.dialogue = dialogueSystem.MenuDialogue();
                 renderer.isRenderingMenu = true;
+                isInMenu = true;
+                playerChoiceNumber = 0;
             }
             else if(dialogue == "MENU2")
             {
                 renderer.menuOptions = menuDialogueItems;
                 renderer.dialogue = dialogueSystem.MenuDialogue();
                 renderer.isRenderingMenu = true;
+                isInMenu = true;
+                playerChoiceNumber = 0;
             }
             else
-            { 
+            {
                 renderer.dialogue = dialogue;
                 renderer.isRenderingMenu = false;
             }
 
         }
-
         internal RectangleF GetPlayerLocation()
         {
             return gc.player.rectangle;

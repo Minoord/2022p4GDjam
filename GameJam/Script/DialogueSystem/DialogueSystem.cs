@@ -37,7 +37,6 @@ namespace GameJam.Game
 
         public string NextDialogue()
         {
-            Console.WriteLine(_dialogue.Count + ":" + lineNumber);
             lineNumber += 1;
             if (lineNumber >= _dialogue.Count)
             {
@@ -53,7 +52,6 @@ namespace GameJam.Game
         {
             lineNumber -= 2;
             var dialogue = NextDialogue();
-            Console.WriteLine("menu");
             lineNumber += 1;
             return dialogue;
 

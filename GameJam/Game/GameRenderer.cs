@@ -84,15 +84,19 @@ namespace GameJam.Game
         
         private void RenderMenu(Graphics g, List<string> list)
         {
-            if (list == null || list.Count == 0) return;
-            var height = 10;
-            var space = 10 / list.Count;
+            if (list == null || list.Count <= 0)
+            {
+                isRenderingMenu = false;
+                return;
+            }
+            var height = 100;
+            var space =  height / list.Count;
             var currentspace = space;
             foreach (var strings in list)
             {
                 currentspace += 10;
-                Console.WriteLine(strings);
-                g.DrawString(strings, font, colourBrush, new Point(15, currentspace));
+
+                g.DrawString(strings, font, colourBrush, new Point(115, currentspace));
             }
         }
         private void RenderDialogue(Graphics g, string dialogue)
