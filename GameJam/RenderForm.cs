@@ -25,6 +25,9 @@ namespace GameJam
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();
 
+        public List<string> menuDialogueItems = new List<string>();
+        public List<string> menuDialogueChar = new List<string>();
+
         public RenderForm()
         {
             InitializeComponent();
@@ -73,6 +76,15 @@ namespace GameJam
                 frames = gc.spriteMap.GetDialoguePosition(),
                 rectangle = new Rectangle(0, 80, 160, 40),
             };
+            
+            gc.Menu = new RenderObject()
+            {
+                frames = gc.spriteMap.GetDialoguePosition(),
+                rectangle = new Rectangle(112, 50, 50, 40),
+            };
+
+
+
         }
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
@@ -108,7 +120,25 @@ namespace GameJam
         {
             if (dialogueSystem == null) return;
             renderer.isRenderingDialogue = true;
-            renderer.dialogue = dialogueSystem.NextDialogue();
+            var dialogue = dialogueSystem.NextDialogue();
+            if (dialogue == "MENU1")
+            {
+                renderer.menuOptions = menuDialogueChar;
+                renderer.dialogue = dialogueSystem.MenuDialogue();
+                renderer.isRenderingMenu = true;
+            }
+            else if(dialogue == "MENU2")
+            {
+                renderer.menuOptions = menuDialogueItems;
+                renderer.dialogue = dialogueSystem.MenuDialogue();
+                renderer.isRenderingMenu = true;
+            }
+            else
+            { 
+                renderer.dialogue = dialogue;
+                renderer.isRenderingMenu = false;
+            }
+
         }
 
         internal RectangleF GetPlayerLocation()

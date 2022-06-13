@@ -73,7 +73,12 @@ namespace GameJam.Game
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
             dialogueSystem.AddDialogue("Im Hammer Bro", Characters.Ba);
-            dialogueSystem.AddDialogue("Im the Judge", Characters.Ba);
+            dialogueSystem.AddDialogue("Who is the murderer", Characters.Ba);
+            dialogueSystem.AddDialogue("MENU1", Characters.Ba);
+            dialogueSystem.AddDialogue("You?", Characters.Ba);
+            dialogueSystem.AddDialogue("MENU2", Characters.Ba);
+            dialogueSystem.AddDialogue("With this weapon?", Characters.Ba);
+
             return dialogueSystem;
         }        
         public DialogueSystem BowserDialogue()

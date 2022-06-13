@@ -8,7 +8,8 @@ namespace GameJam.Game
 {
     public class DialogueSystem
     {
-        private int lineNumber = -1; 
+        private int lineNumber = -1;
+
         private Dictionary<string, Characters> _dialogueSpeaker = new Dictionary<string, Characters>();
         public List<string> _dialogue = new List<string>();
 
@@ -40,7 +41,6 @@ namespace GameJam.Game
             lineNumber += 1;
             if (lineNumber >= _dialogue.Count)
             {
-                Console.WriteLine("canceld");
                 DeleteDialogue();
                 lineNumber = -1;
                 return null;
@@ -49,7 +49,15 @@ namespace GameJam.Game
            
         }
 
+        public string MenuDialogue()
+        {
+            lineNumber -= 2;
+            var dialogue = NextDialogue();
+            Console.WriteLine("menu");
+            lineNumber += 1;
+            return dialogue;
 
+        }
         public Characters GetSpeaker()
         {
             var text = _dialogue[lineNumber];

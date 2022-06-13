@@ -36,7 +36,11 @@ namespace GameJam
 
             // Call Dialogue System here
             renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(test);
-            renderForm.PlayDialogue(); 
+            renderForm.PlayDialogue();
+            foreach(var item in inventory.inventory)
+            {
+                renderForm.menuDialogueItems.Add(item.Key);
+            }
 
             // Mark Debug Begin
             Console.WriteLine(test);

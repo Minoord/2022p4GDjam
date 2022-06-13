@@ -2,6 +2,11 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace GameJam.Game
 {
@@ -18,6 +23,9 @@ namespace GameJam.Game
         public string dialogue;
 
         public bool isRenderingDialogue;
+        public bool isRenderingMenu;
+
+        public List<string> menuOptions;
 
         public GameRenderer(GameContext context)
         {
@@ -52,6 +60,9 @@ namespace GameJam.Game
             if (!isRenderingDialogue) return;
             RenderObject(g, context.dialougue);
             RenderDialogue(g, dialogue);
+            if (!isRenderingMenu) return;
+            RenderObject(g, context.Menu);
+            RenderMenu(g, menuOptions);
         }
 
         private void RenderRoom(Graphics g)
@@ -70,7 +81,20 @@ namespace GameJam.Game
             g.DrawImage(image, renderObject.rectangle, renderObject.frames[(int)renderObject.frame], GraphicsUnit.Pixel);
             renderObject.MoveFrame(frametime);
         }
-
+        
+        private void RenderMenu(Graphics g, List<string> list)
+        {
+            if (list == null || list.Count == 0) return;
+            var height = 10;
+            var space = 10 / list.Count;
+            var currentspace = space;
+            foreach (var strings in list)
+            {
+                currentspace += 10;
+                Console.WriteLine(strings);
+                g.DrawString(strings, font, colourBrush, new Point(15, currentspace));
+            }
+        }
         private void RenderDialogue(Graphics g, string dialogue)
         {
             g.DrawString(dialogue, font, colourBrush , new Point(15,90));
