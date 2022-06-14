@@ -89,9 +89,8 @@ namespace GameJam.Game
                 isRenderingMenu = false;
                 return;
             }
-            var height = 100;
-            var space =  height / list.Count;
-            var currentspace = space;
+            var height = 20;
+            var currentspace = height + 10;
             foreach (var strings in list)
             {
                 currentspace += 10;

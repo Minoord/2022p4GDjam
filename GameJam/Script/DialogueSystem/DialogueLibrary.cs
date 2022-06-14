@@ -78,6 +78,7 @@ namespace GameJam.Game
             dialogueSystem.AddDialogue("You?", Characters.Ba);
             dialogueSystem.AddDialogue("MENU2", Characters.Ba);
             dialogueSystem.AddDialogue("With this weapon?", Characters.Ba);
+            dialogueSystem.AddDialogue("ENDDIA", Characters.Ba);
 
             return dialogueSystem;
         }        
@@ -103,7 +104,14 @@ namespace GameJam.Game
             return dialogueSystem;
         }
         
-
+        public DialogueSystem EndDialogue()
+        {
+            DialogueSystem dialogueSystem = new DialogueSystem();
+            dialogueSystem.AddDialogue("This is the end", Characters.Ba);
+            dialogueSystem.AddDialogue("of everything...", Characters.Ba);
+            dialogueSystem.AddDialogue("END", Characters.Ba);
+            return dialogueSystem;
+        }
 
     }
 }

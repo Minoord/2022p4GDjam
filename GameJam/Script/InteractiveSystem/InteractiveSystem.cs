@@ -36,6 +36,7 @@ namespace GameJam
 
             // Call Dialogue System here
             renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(test);
+            renderForm.isSpeaking = true;
             renderForm.PlayDialogue();
             foreach(var item in inventory.inventory)
             {

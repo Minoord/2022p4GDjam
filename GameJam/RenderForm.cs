@@ -18,7 +18,7 @@ namespace GameJam
         private Inventory inventory;
         private LevelLoader levelLoader;
         private float frametime;
-        private bool isSpeaking { get; set; }
+        public bool isSpeaking;
         private bool isInMenu { get; set; }
 
         public DialogueLibrary dialogueLibrary = new DialogueLibrary();
@@ -28,8 +28,8 @@ namespace GameJam
 
         public List<string> menuDialogueItems = new List<string>();
         public List<string> menuDialogueChar = new List<string>();
+        private List<string> playersChoices = new List<string>();
 
-        private string playersChoice;
         private int playerChoiceNumber;
 
         public RenderForm()
@@ -93,57 +93,63 @@ namespace GameJam
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
         {
+            if (!isSpeaking)
+            {
+                if (e.KeyCode == Keys.W)
+                {
+                    MovePlayer(0, -1);
+                }
+                else if (e.KeyCode == Keys.S)
+                {
+                    MovePlayer(0, 1);
+                }
+                else if (e.KeyCode == Keys.A)
+                {
+                    MovePlayer(-1, 0);
+                }
+                else if (e.KeyCode == Keys.D)
+                {
+                    MovePlayer(1, 0);
+                }
+                else if (e.KeyCode == Keys.E)
+                {
+                    //inventory.PrintAllItems();
+                    CheckTiles();
+                }
+            }
+            else
+            {
+                 if (e.KeyCode == Keys.Return && !isInMenu)
+                {
+                    PlayDialogue();
+                }
+                else if (isInMenu)
+                {
+                    inMenu(e);
+                }
+            }
 
-            if (e.KeyCode == Keys.W)
-            {
-                MovePlayer(0, -1);
-            }
-            else if (e.KeyCode == Keys.S)
-            {
-                MovePlayer(0, 1);
-            }
-            else if (e.KeyCode == Keys.A)
-            {
-                MovePlayer(-1, 0);
-            }
-            else if (e.KeyCode == Keys.D)
-            {
-                MovePlayer(1, 0);
-            }
-            else if (e.KeyCode == Keys.Enter || !isInMenu)
-            {
-                PlayDialogue();
-            }
 
-            if (isInMenu)
-            {
-                inMenu(e);
-            }
-            if (e.KeyCode == Keys.E)
-            {
-                //inventory.PrintAllItems();
-                CheckTiles();
-            }
         }
 
         public void inMenu(KeyEventArgs e)
         {
-            Console.WriteLine(e.KeyCode);
-            if (e.KeyCode == Keys.I)
+            Console.WriteLine(renderer.menuOptions.Count +":"+  playerChoiceNumber);
+            if (e.KeyCode == Keys.Return)
             {
-                playersChoice = renderer.menuOptions[playerChoiceNumber];
-                //PlayDialogue();
+                playersChoices.Add(renderer.menuOptions[playerChoiceNumber]);
+                PlayDialogue();
                 isInMenu = false;
             }
-            if (e.KeyCode == Keys.Up)
+            else if (e.KeyCode == Keys.Up)
             {
                 playerChoiceNumber -= 1;
-                if (playerChoiceNumber < 0) playerChoiceNumber = renderer.menuOptions.Count;
+                if (playerChoiceNumber < 0) playerChoiceNumber = renderer.menuOptions.Count -1;
             }
             else if (e.KeyCode == Keys.Down)
             {
                 playerChoiceNumber += 1;
-                if (playerChoiceNumber > renderer.menuOptions.Count) playerChoiceNumber = 0;
+                if (playerChoiceNumber >= renderer.menuOptions.Count) playerChoiceNumber = 0;
             }
         }
 
@@ -154,6 +160,8 @@ namespace GameJam
             var dialogue = dialogueSystem.NextDialogue();
             if (dialogue == null)
             {
+                isInMenu = false;
+                isSpeaking = false;
                 menuDialogueItems.Clear();
                 menuDialogueChar.Clear();
             }
@@ -173,8 +181,18 @@ namespace GameJam
                 isInMenu = true;
                 playerChoiceNumber = 0;
             }
+            else if( dialogue == "ENDDIA")
+            {
+                dialogueSystem = dialogueLibrary.EndDialogue();
+            }
+            else if (dialogue == "END")
+            {
+                Console.WriteLine("komt hier");
+                Application.Restart();
+            }
             else
             {
+                isInMenu = false;
                 renderer.dialogue = dialogue;
                 renderer.isRenderingMenu = false;
             }
