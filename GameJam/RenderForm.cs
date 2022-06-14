@@ -44,7 +44,7 @@ namespace GameJam
         private void RenderForm_Load(object sender, EventArgs e)
         {
             inventory = new Inventory();
-            world = new World();
+            world = new World(gc);
             interactiveSystem = new InteractiveSystem(this, inventory, world);
 
             levelLoader = new LevelLoader(gc.tileSize, new FileLevelDataSource());
@@ -154,10 +154,10 @@ namespace GameJam
 
             Tile next = gc.room.tiles.SelectMany(ty => ty.Where(tx => tx.rectangle.Contains((int)newx, (int)newy))).FirstOrDefault();
 
-            bool isChar = world.characters.ContainsKey(next.graphic);
-            bool isItem = world.worldItems.ContainsKey(next.graphic);
             if (next != null)
             {
+                bool isChar = world.characters.ContainsKey(next.graphic);
+                bool isItem = world.worldItems.ContainsKey(next.graphic);
                 if (next.graphic == 'D')
                 {
                     EnterRoom(x, y, player);
