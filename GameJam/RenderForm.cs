@@ -158,7 +158,7 @@ namespace GameJam
             {
                 bool isChar = world.characters.ContainsKey(next.graphic);
                 bool isItem = world.worldItems.ContainsKey(next.graphic);
-                if (next.graphic == 'D')
+                if (next.graphic == ']')
                 {
                     EnterRoom(x, y, player);
                 }
