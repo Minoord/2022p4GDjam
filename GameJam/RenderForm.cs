@@ -20,6 +20,8 @@ namespace GameJam
         private float frametime;
         public bool isSpeaking;
         private bool isInMenu { get; set; }
+        private bool itemIsCorrectly;
+        private bool charIsCorrectly;
 
         public DialogueLibrary dialogueLibrary = new DialogueLibrary();
         public DialogueSystem dialogueSystem;
@@ -183,11 +185,10 @@ namespace GameJam
             }
             else if( dialogue == "ENDDIA")
             {
-                dialogueSystem = dialogueLibrary.EndDialogue();
+                dialogueSystem = dialogueLibrary.EndDialogue(playersChoices);
             }
             else if (dialogue == "END")
             {
-                Console.WriteLine("komt hier");
                 Application.Restart();
             }
             else
@@ -198,6 +199,7 @@ namespace GameJam
             }
 
         }
+
         internal RectangleF GetPlayerLocation()
         {
             return gc.player.rectangle;

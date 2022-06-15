@@ -16,6 +16,7 @@ namespace GameJam
         Goom,
         Ba,
         Hammer_Bro,
-        Shroomlock
+        Shroomlock,
+        Narrator
     }
 }
