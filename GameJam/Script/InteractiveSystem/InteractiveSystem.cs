@@ -23,19 +23,12 @@ namespace GameJam
             this.world = world;
         }
 
-        private bool isInRange;
-
-        internal bool IsInRange(bool isInRange)
-        {
-            return this.isInRange = isInRange;
-        }
-
         internal void Interact(char c)
         {
-            var test = world.characters[c];
+            Characters character = world.characters[c];
 
             // Call Dialogue System here
-            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(test);
+            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
             renderForm.isSpeaking = true;
             renderForm.PlayDialogue();
             foreach(var item in inventory.inventory)
@@ -50,19 +43,21 @@ namespace GameJam
             }
 
             // Mark Debug Begin
-            Console.WriteLine(test);
+            Console.WriteLine(character);
             // Mark Debug End
+            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
+            renderForm.PlayDialogue();
+
         }
 
-        internal void PickUp(char itemChar)
+        internal void PickUp(char c)
         {
-            Item item = new Item("", "");
-            world.worldItems.TryGetValue(itemChar, out item);
-            inventory.AddItem(item);
+            string itemName = world.worldItems[c].name;
+
+            inventory.AddItem(world.worldItems[c]);
 
             // Mark Debug Begin
-            //Console.WriteLine(item.name);
-            //Console.WriteLine(item.description);
+            Console.WriteLine("Added " + itemName + " to inventory.");
             // Mark Debug End
         }
     }
