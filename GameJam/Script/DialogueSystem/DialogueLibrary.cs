@@ -8,7 +8,7 @@ namespace GameJam.Game
 {
     public class DialogueLibrary
     {
-      
+        private bool hasSuicideNote;
         public DialogueSystem WhichCharacterDialogue(Characters chara)
         {
             switch (chara)
@@ -104,11 +104,12 @@ namespace GameJam.Game
             return dialogueSystem;
         }
         
-        public DialogueSystem EndDialogue(List<string> answer)
+        public DialogueSystem EndDialogue(List<string> answer, bool hasNote)
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
             var item = answer[1];
             var chara = answer[0];
+            hasSuicideNote = hasNote;
 
             dialogueSystem.AddDialogue("Mario has been murderd by  " +  chara, Characters.Ba);
             dialogueSystem.AddDialogue("using a " + item, Characters.Ba);
@@ -125,23 +126,27 @@ namespace GameJam.Game
                     CharCheckDialogue(dialogueSystem, chara);
                     break;
                 case "Lighter":
+                    dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
                     dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a lighter", Characters.Bowser);
-                    dialogueSystem.AddDialogue("It would have lighten up the room and everybody would have seen it!", Characters.Bowser);
+                    dialogueSystem.AddDialogue("It would have lit up the room and everybody would have seen it!", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Pan":
+                    dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
                     dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a pan", Characters.Bowser);
                     dialogueSystem.AddDialogue("Mario didn't have bruises or anything else that could have implemented", Characters.Bowser);
                     dialogueSystem.AddDialogue("that he was hit with the pan!", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Coin":
+                    dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
                     dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a coin", Characters.Bowser);
                     dialogueSystem.AddDialogue("Mario didn't have marks or anything else that could have implemented", Characters.Bowser);
                     dialogueSystem.AddDialogue("that he was murderd with the coin", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Gun":
+                    dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
                     dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a gun", Characters.Bowser);
                     dialogueSystem.AddDialogue("if the murdrer used the gun a bullet should have been found", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
@@ -154,7 +159,7 @@ namespace GameJam.Game
             switch (chara)
             {
                 case "Mario":
-                    WinDialogue(DialogueSystem);
+                    WinDialogue(dialogueSystem);
                     break;
                 case "Peach":
                     dialogueSystem.AddDialogue("Shroomlock how could you say that I murderd him!", Characters.Peach);
@@ -164,7 +169,7 @@ namespace GameJam.Game
                     break;
                 case "Daisy":
                     dialogueSystem.AddDialogue("WHAT! ME!?, I COULDN'T HAVE DONE IT I WAS BEHIND HIM!", Characters.Daisy);
-                    dialogueSystem.AddDialogue("(She is right, Mario could have turned around, but the stabwound was to precisely in the heart)", Characters.Shroomlock);
+                    dialogueSystem.AddDialogue("(She is right, but Mario could have turned around, still the stabwound was to precisely in the heart)", Characters.Shroomlock);
                     dialogueSystem.AddDialogue("(The murderer knew excatly where they were aiming)", Characters.Shroomlock);
                     DefeatDialogue(dialogueSystem);
                     break;
@@ -172,26 +177,33 @@ namespace GameJam.Game
                     dialogueSystem.AddDialogue("Me?, I killed my brother?, but i only bumped into him", Characters.Luigi);
                     dialogueSystem.AddDialogue("(A bumped couldn't have killed Mario,)", Characters.Shroomlock);
                     dialogueSystem.AddDialogue("(besides when the light went on Luigi was also on the floor)", Characters.Shroomlock);
-                    dialogueSystem.AddDialogue("(and should have been coverd in blood)", Characters.Shroomlock);
+                    dialogueSystem.AddDialogue("(If he did it he should have been coverd in blood)", Characters.Shroomlock);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Bowser":
                     dialogueSystem.AddDialogue("ME!? HOW YOU DARE SAY ME. MABYE I AM THE VILLIAN ", Characters.Bowser);
                     dialogueSystem.AddDialogue("BUT I DIDN'T KILL HIM! I'LL TELL YOU WHY", Characters.Bowser);
-                    dialogueSystem.AddDialogue(" First the lights went out", Characters.Bowser);
-                    dialogueSystem.AddDialogue("I was right infront of him, but in the dark ", Characters.Bowser);
-                    dialogueSystem.AddDialogue("would it be hard to get to him and stab him in the heart", Characters.Bowser);
+                    dialogueSystem.AddDialogue("When the lights went out", Characters.Bowser);
+                    dialogueSystem.AddDialogue("I was right infront of him. In the dark ", Characters.Bowser);
+                    dialogueSystem.AddDialogue("would have been hard to get to him and stab him in the heart", Characters.Bowser);
+                    dialogueSystem.AddDialogue("He is right", Characters.Shroomlock);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Goom":
-                    dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a gun", Characters.Bowser);
-                    dialogueSystem.AddDialogue("if the murdrer used the gun a bullet should have been found", Characters.Bowser);
+                    dialogueSystem.AddDialogue("Murderer is Goom?", Characters.Goom);
+                    dialogueSystem.AddDialogue("Goom didn't murder him he was beside me the whole time", Characters.Bowser);
+                    dialogueSystem.AddDialogue("besides he doesn't have hands so he couldn't have", Characters.Bowser);
+                    dialogueSystem.AddDialogue("stabbed him precisely in the heart", Characters.Bowser);
+                    dialogueSystem.AddDialogue("He is right", Characters.Shroomlock);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Ba":
-                    dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a gun", Characters.Bowser);
-                    dialogueSystem.AddDialogue("if the murdrer used the gun a bullet should have been found", Characters.Bowser);
-                    DefeatDialogue(dialogueSystem);
+                    dialogueSystem.AddDialogue("Ba? BA? BAA?", Characters.Ba);
+                    dialogueSystem.AddDialogue("*Ba Charges towards Shroomlock and starts attacking him*", Characters.Narrator);
+                    dialogueSystem.AddDialogue("A second murder happend that day", Characters.Narrator);
+                    dialogueSystem.AddDialogue("Who knew goombas can be so aggresive", Characters.Narrator);
+                    dialogueSystem.AddDialogue("Anyway Ba was not the murderer, press enter to restart", Characters.Narrator);
+                    dialogueSystem.AddDialogue("END", Characters.Narrator);
                     break;
             }
         }
@@ -205,8 +217,32 @@ namespace GameJam.Game
 
         private void WinDialogue(DialogueSystem dialogueSystem)
         {
-            dialogueSystem.AddDialogue("You solved the murder!", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("press enter to restart", Characters.Narrator);
+            if (hasSuicideNote)
+            {
+                dialogueSystem.AddDialogue("*Everybody in the room went silent*", Characters.Narrator);
+                dialogueSystem.AddDialogue("Dont believe me, thats fine but mabye this will change your mind", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("*Shroomlock shows the suicide note*", Characters.Narrator);
+                dialogueSystem.AddDialogue("Mario committed suicide and someone tried covering it up", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("Who that person is I have no idea", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("But I'll leave that to the police", Characters.Shroomlock);
+
+            }
+            else
+            {
+                dialogueSystem.AddDialogue("*Everybody in the room went silent*", Characters.Narrator);
+                dialogueSystem.AddDialogue("Mario had stab wound in his chest", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("The knife was the only weapon in room", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("that could have done something like that", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("It was too dark in the room for somebody to see where he was", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("and even if someone knew it was too dark to see where his heart was", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("So it was suicide!", Characters.Shroomlock);
+            }
+
+            dialogueSystem.AddDialogue("I think we have our answer, ", Characters.Hammer_Bro);
+            dialogueSystem.AddDialogue("I hereby declare that this murder is suicide!", Characters.Hammer_Bro);
+            dialogueSystem.AddDialogue("*Hammer bro slams his hammer*", Characters.Narrator);
+            dialogueSystem.AddDialogue("The case is closed and you solved the murderer", Characters.Narrator);
+            dialogueSystem.AddDialogue("Good job! press enter to restart", Characters.Narrator);
             dialogueSystem.AddDialogue("END", Characters.Narrator);
 
         }

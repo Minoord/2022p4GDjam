@@ -46,7 +46,8 @@ namespace GameJam
             {
                 var charName = chara.Value.ToString();
                 bool isShroomlock = charName == "Shroomlock";
-               if (!isShroomlock) renderForm.menuDialogueChar.Add(charName);
+                bool isHammerBro = charName == "Hammer_Bro";
+               if (!isShroomlock && !isHammerBro) renderForm.menuDialogueChar.Add(charName);
             }
 
             // Mark Debug Begin

@@ -32,7 +32,7 @@ namespace GameJam
         public List<string> menuDialogueChar = new List<string>();
         private List<string> playersChoices = new List<string>();
 
-        private int playerChoiceNumber;
+        private int playerChoiceNumber = 0;
 
         public RenderForm()
         {
@@ -115,13 +115,14 @@ namespace GameJam
                 }
                 else if (e.KeyCode == Keys.E)
                 {
-                    //inventory.PrintAllItems();
+                    inventory.PrintAllItems();
                     CheckTiles();
                 }
             }
             else
             {
-                 if (e.KeyCode == Keys.Return && !isInMenu)
+                Console.WriteLine("Help");
+                if (e.KeyCode == Keys.Return && !isInMenu)
                 {
                     PlayDialogue();
                 }
@@ -174,6 +175,7 @@ namespace GameJam
                 renderer.isRenderingMenu = true;
                 isInMenu = true;
                 playerChoiceNumber = 0;
+                isSpeaking = true;
             }
             else if(dialogue == "MENU2")
             {
@@ -182,10 +184,12 @@ namespace GameJam
                 renderer.isRenderingMenu = true;
                 isInMenu = true;
                 playerChoiceNumber = 0;
+                isSpeaking = true;
             }
             else if( dialogue == "ENDDIA")
             {
-                dialogueSystem = dialogueLibrary.EndDialogue(playersChoices);
+                dialogueSystem = dialogueLibrary.EndDialogue(playersChoices, false);
+                isSpeaking = true;
             }
             else if (dialogue == "END")
             {
@@ -196,6 +200,7 @@ namespace GameJam
                 isInMenu = false;
                 renderer.dialogue = dialogue;
                 renderer.isRenderingMenu = false;
+                isSpeaking = true;
             }
 
         }
