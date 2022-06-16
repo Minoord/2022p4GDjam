@@ -121,7 +121,6 @@ namespace GameJam
             }
             else
             {
-                Console.WriteLine("Help");
                 if (e.KeyCode == Keys.Return && !isInMenu)
                 {
                     PlayDialogue();
