@@ -25,6 +25,9 @@ namespace GameJam.Game
             characters.Add('H', Characters.Hammer_Bro);
             characters.Add('P', Characters.Peach);
             characters.Add('D', Characters.Daisy);
+            characters.Add('G', Characters.Goom);
+            characters.Add('b', Characters.Ba);
+            characters.Add('M', Characters.Mario);
         }
     }
 }
