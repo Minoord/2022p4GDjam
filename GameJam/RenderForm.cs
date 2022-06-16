@@ -53,7 +53,7 @@ namespace GameJam
         private void RenderForm_Load(object sender, EventArgs e)
         {
             inventory = new Inventory();
-            world = new World(gc);
+            world = new World();
             interactiveSystem = new InteractiveSystem(this, inventory, world);
 
             levelLoader = new LevelLoader(gc.tileSize, new FileLevelDataSource());
@@ -63,7 +63,7 @@ namespace GameJam
 
             gc.room = levelLoader.GetRoom(0, 0);
 
-            gc.player = new RenderObject() // MARK HIER WORD PLAYER GERENDERED
+            gc.player = new RenderObject()
             {
                 frames = gc.spriteMap.GetPlayerFrames(),
                 rectangle = new Rectangle(2 * gc.tileSize, 2 * gc.tileSize, gc.tileSize, gc.tileSize),
@@ -146,14 +146,12 @@ namespace GameJam
             else if (e.KeyCode == Keys.Up)
             {
                 playerChoiceNumber -= 1;
-                if (playerChoiceNumber < 0) playerChoiceNumber = renderer.menuOptions.Count - 1;
+                if (playerChoiceNumber < 0) playerChoiceNumber = renderer.menuOptions.Count -1;
             }
             else if (e.KeyCode == Keys.Down)
             {
                 playerChoiceNumber += 1;
                 if (playerChoiceNumber >= renderer.menuOptions.Count) playerChoiceNumber = 0;
-
-                CheckTiles();
             }
         }
 
@@ -227,26 +225,26 @@ namespace GameJam
             tx.rectangle.Contains((int)player.rectangle.X, (int)newBottom))
             &&
             world.characters.ContainsKey(tx.graphic)
-            )).FirstOrDefault();
-
+            ))
+                .FirstOrDefault();
             if (next == null) return;
+
             interactiveSystem.Interact(next.graphic);
         }
 
         private void MovePlayer(int x, int y)
         {
-            if (renderer.isRenderingDialogue) return;
             RenderObject player = gc.player;
             float newx = player.rectangle.X + (x * gc.tileSize);
             float newy = player.rectangle.Y + (y * gc.tileSize);
 
             Tile next = gc.room.tiles.SelectMany(ty => ty.Where(tx => tx.rectangle.Contains((int)newx, (int)newy))).FirstOrDefault();
 
+            bool isChar = world.characters.ContainsKey(next.graphic);
+            bool isItem = world.worldItems.ContainsKey(next.graphic);
             if (next != null)
             {
-                bool isChar = world.characters.ContainsKey(next.graphic);
-                bool isItem = world.worldItems.ContainsKey(next.graphic);
-                if (next.graphic == ']')
+                if (next.graphic == 'D')
                 {
                     EnterRoom(x, y, player);
                 }
