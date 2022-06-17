@@ -128,10 +128,10 @@ namespace GameJam
                 {
                     MovePlayer(1, 0);
                 }
-                else if (e.KeyCode == Keys.E)
+                else if (e.KeyCode == Keys.E && !renderer.isRenderingDialogue)
                 {
-                    CheckTiles();
-               }
+                   CheckTiles();
+                }
             
                 if (e.KeyCode == Keys.Return && !isInMenu)
                 {
