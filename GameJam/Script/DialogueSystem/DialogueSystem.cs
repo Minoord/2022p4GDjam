@@ -56,10 +56,16 @@ namespace GameJam.Game
             return dialogue;
 
         }
-        public Characters GetSpeaker()
+        public string GetSpeaker()
         {
+            if (lineNumber >= _dialogue.Count || lineNumber < 0)
+            {
+                DeleteDialogue();
+                lineNumber = -1;
+                return null;
+            }
             var text = _dialogue[lineNumber];
-            return _dialogueSpeaker[text];
+            return "[" + _dialogueSpeaker[text].ToString() + "]";
         }
     }
 }
