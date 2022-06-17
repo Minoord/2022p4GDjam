@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GameJam
+namespace GameJam.Game
 {
-    class DialogueSystem
+    public class DialogueSystem
     {
-        private int lineNumber = -1; 
+        private int lineNumber = -1;
+
         private Dictionary<string, Characters> _dialogueSpeaker = new Dictionary<string, Characters>();
-        private List<string> _dialogue = new List<string>();
+        public List<string> _dialogue = new List<string>();
 
         public void AddDialogue(string text, Characters talkingCharachter)
         {
@@ -37,14 +38,34 @@ namespace GameJam
         public string NextDialogue()
         {
             lineNumber += 1;
+            if (lineNumber >= _dialogue.Count)
+            {
+                DeleteDialogue();
+                lineNumber = -1;
+                return null;
+            }
             return _dialogue[lineNumber];
+           
         }
 
-
-        public Characters GetSpeaker()
+        public string MenuDialogue()
         {
+            lineNumber -= 2;
+            var dialogue = NextDialogue();
+            lineNumber += 1;
+            return dialogue;
+
+        }
+        public string GetSpeaker()
+        {
+            if (lineNumber >= _dialogue.Count || lineNumber < 0)
+            {
+                DeleteDialogue();
+                lineNumber = -1;
+                return null;
+            }
             var text = _dialogue[lineNumber];
-            return _dialogueSpeaker[text];
+            return "[" + _dialogueSpeaker[text].ToString() + "]";
         }
     }
 }

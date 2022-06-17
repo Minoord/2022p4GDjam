@@ -14,6 +14,7 @@ namespace GameJam
         internal RenderForm renderForm;
         internal World world;
         internal Inventory inventory;
+        public DialogueLibrary dialogueLibrary = new DialogueLibrary();
 
         public InteractiveSystem(RenderForm renderForm, Inventory inventory, World world)
         {
@@ -22,34 +23,45 @@ namespace GameJam
             this.world = world;
         }
 
-        private bool isInRange;
-
-        internal bool IsInRange(bool isInRange)
-        {
-            return this.isInRange = isInRange;
-        }
-
         internal void Interact(char c)
         {
-            var test = world.characters[c];
+            Characters character = world.characters[c];
 
             // Call Dialogue System here
+            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
+            renderForm.isSpeaking = true;
+            renderForm.PlayDialogue();
+            foreach(var item in inventory.inventory)
+            {
+                var isSecretItem = item.Key == "Suicide note";
+                if (isSecretItem)
+                {
+                    renderForm.hasNote = true;
+                    continue;
+                }
+                renderForm.menuDialogueItems.Add(item.Key);
+            }
+            foreach (var chara in world.characters)
+            {
+                var charName = chara.Value.ToString();
+                bool isShroomlock = charName == "Shroomlock";
+                bool isHammerBro = charName == "Hammer_Bro";
+               if (!isShroomlock && !isHammerBro) renderForm.menuDialogueChar.Add(charName);
+            }
 
-            // Mark Debug Begin
-            Console.WriteLine(test);
-            // Mark Debug End
+            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
+            renderForm.PlayDialogue();
+
         }
 
-        internal void PickUp(char itemChar)
+        internal void PickUp(char c)
         {
-            Item item = new Item("", "");
-            world.worldItems.TryGetValue(itemChar, out item);
-            inventory.AddItem(item);
+            string itemName = world.worldItems[c].name;
 
-            // Mark Debug Begin
-            //Console.WriteLine(item.name);
-            //Console.WriteLine(item.description);
-            // Mark Debug End
+            inventory.AddItem(world.worldItems[c]);
+
+            renderForm.dialogueSystem = dialogueLibrary.AddedToInventory(itemName);
+            renderForm.PlayDialogue();
         }
     }
 }

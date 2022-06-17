@@ -2,6 +2,11 @@
 using System.Drawing;
 using System.Drawing.Drawing2D;
 using System.Windows.Forms;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace GameJam.Game
 {
@@ -14,7 +19,14 @@ namespace GameJam.Game
         private Font font = new Font(FontFamily.GenericMonospace, 5); 
         private SolidBrush colourBrush = new SolidBrush(Color.White);
 
-        public bool isRenderingDialogue = true;
+        public DialogueSystem dialogueSystem;
+        public string dialogue;
+        public string speaker;
+
+        public bool isRenderingDialogue;
+        public bool isRenderingMenu;
+
+        public List<string> menuOptions;
 
         public GameRenderer(GameContext context)
         {
@@ -44,9 +56,16 @@ namespace GameJam.Game
             Graphics g = InitGraphics(e);
             RenderRoom(g);
             RenderObject(g, context.player);
+            RenderObject(g, context.blackScreen);
+
+            if (dialogue == null) isRenderingDialogue = false;
             if (!isRenderingDialogue) return;
             RenderObject(g, context.dialougue);
-            RenderDialogue(g, "Works!");
+            RenderDialogue(g, dialogue, speaker);
+            if (!isRenderingMenu) return;
+            RenderObject(g, context.menu);
+            RenderObject(g, context.dialougueArrow);
+            RenderMenu(g, menuOptions);
         }
 
         private void RenderRoom(Graphics g)
@@ -66,10 +85,26 @@ namespace GameJam.Game
             renderObject.MoveFrame(frametime);
         }
 
-        private void RenderDialogue(Graphics g, string dialogue)
+        private void RenderMenu(Graphics g, List<string> list)
         {
-            g.DrawString(dialogue, font, colourBrush , new Point(15,90));
- 
+            if (list == null || list.Count <= 0)
+            {
+                isRenderingMenu = false;
+                return;
+            }
+            var height = -15;
+            var currentspace = height + 10;
+            foreach (var strings in list)
+            {
+                currentspace += 10;
+
+                g.DrawString(strings, font, colourBrush, new Point(127, currentspace));
+            }
+        }
+        private void RenderDialogue(Graphics g, string dialogue, string speaker)
+        {
+            g.DrawString(speaker, font, colourBrush , new Point(5,80));
+            g.DrawString(dialogue, font, colourBrush , new Point(5,90));
         }
 
         public void Dispose()

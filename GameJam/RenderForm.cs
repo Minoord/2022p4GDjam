@@ -18,11 +18,23 @@ namespace GameJam
         private Inventory inventory;
         private LevelLoader levelLoader;
         private float frametime;
-        private bool isSpeaking { get; set; }
+        public bool isSpeaking;
+        private bool isInMenu { get; set; }
+        public bool hasNote;
 
-        private DialogueSystem _dialogueSystem;
+        public DialogueLibrary dialogueLibrary = new DialogueLibrary();
+        public DialogueSystem dialogueSystem;
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();
+
+        public List<string> menuDialogueItems = new List<string>();
+        public List<string> menuDialogueChar = new List<string>();
+        private List<string> playersChoices = new List<string>();
+
+        private int playerChoiceNumber = 0;
+
+        private int currentSpace = 5;
+
         public RenderForm()
         {
             InitializeComponent();
@@ -42,7 +54,7 @@ namespace GameJam
         private void RenderForm_Load(object sender, EventArgs e)
         {
             inventory = new Inventory();
-            world = new World();
+            world = new World(gc);
             interactiveSystem = new InteractiveSystem(this, inventory, world);
 
             levelLoader = new LevelLoader(gc.tileSize, new FileLevelDataSource());
@@ -52,7 +64,7 @@ namespace GameJam
 
             gc.room = levelLoader.GetRoom(0, 0);
 
-            gc.player = new RenderObject()
+            gc.player = new RenderObject() // MARK HIER WORD PLAYER GERENDERED
             {
                 frames = gc.spriteMap.GetPlayerFrames(),
                 rectangle = new Rectangle(2 * gc.tileSize, 2 * gc.tileSize, gc.tileSize, gc.tileSize),
@@ -69,37 +81,155 @@ namespace GameJam
             gc.dialougue = new RenderObject()
             {
                 frames = gc.spriteMap.GetDialoguePosition(),
-                rectangle = new Rectangle(0, 80, 160, 40),
+                rectangle = new Rectangle(0, 73, 160, 40),
             };
+
+            gc.dialougueArrow = new RenderObject()
+            {
+                frames = gc.spriteMap.GetDialogueArrow(),
+                rectangle = new Rectangle(117, currentSpace, 8, 8),
+            };
+
+            gc.menu = new RenderObject()
+            {
+                frames = gc.spriteMap.GetMenuPosition(),
+                rectangle = new Rectangle(112, 0, 50, 80),
+            };
+
+            gc.blackScreen = new RenderObject()
+            {
+                frames = gc.spriteMap.GetBlackScreen(),
+                rectangle = new Rectangle(0, 0, 300, 300),
+            };
+
+            Item magnifyingGlass = new Item("Magnifying Glass", "A tool used to inspect things up close.");
+            inventory.AddItem(magnifyingGlass);
+            dialogueSystem = dialogueLibrary.BeginDialogue();
+            PlayDialogue();
         }
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.W)
+         
+            
+                if (e.KeyCode == Keys.W)
+                {
+                    MovePlayer(0, -1);
+                }
+                else if (e.KeyCode == Keys.S)
+                {
+                    MovePlayer(0, 1);
+                }
+                else if (e.KeyCode == Keys.A)
+                {
+                    MovePlayer(-1, 0);
+                }
+                else if (e.KeyCode == Keys.D)
+                {
+                    MovePlayer(1, 0);
+                }
+                else if (e.KeyCode == Keys.E && !renderer.isRenderingDialogue)
+                {
+                   CheckTiles();
+                }
+            
+                if (e.KeyCode == Keys.Return && !isInMenu)
+                {
+                    PlayDialogue();
+                }
+                else if (isInMenu)
+                {
+                    inMenu(e);
+                }
+            
+
+        }
+
+        public void inMenu(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
             {
-                MovePlayer(0, -1);
+                playersChoices.Add(renderer.menuOptions[playerChoiceNumber]);
+                PlayDialogue();
+                isInMenu = false;
             }
-            else if (e.KeyCode == Keys.S)
+            else if (e.KeyCode == Keys.Up)
             {
-                MovePlayer(0, 1);
+                playerChoiceNumber -= 1;
+                currentSpace -= 10;
+                if (playerChoiceNumber < 0)
+                {
+                    playerChoiceNumber = renderer.menuOptions.Count - 1;
+                    currentSpace = 5 + (playerChoiceNumber * 10);
+                }
+                gc.dialougueArrow.rectangle = new Rectangle(117, currentSpace, 8, 8);
             }
-            else if (e.KeyCode == Keys.A)
+            else if (e.KeyCode == Keys.Down)
             {
-                MovePlayer(-1, 0);
+                playerChoiceNumber += 1;
+                currentSpace += 10;
+                if (playerChoiceNumber >= renderer.menuOptions.Count)
+                {
+                    playerChoiceNumber = 0;
+                    currentSpace = 5;
+                }
+                gc.dialougueArrow.rectangle = new Rectangle(117, currentSpace, 8, 8);
             }
-            else if (e.KeyCode == Keys.D)
+        }
+
+        public void PlayDialogue()
+        {
+            if (dialogueSystem == null) return;
+            renderer.isRenderingDialogue = true;
+            var dialogue = dialogueSystem.NextDialogue();
+            if (dialogue == null)
             {
-                MovePlayer(1, 0);
+                isInMenu = false;
+                menuDialogueItems.Clear();
+                menuDialogueChar.Clear();
             }
-            else if (e.KeyCode == Keys.Enter || isSpeaking)
+            if (dialogue == "MENU1")
             {
-                _dialogueSystem.NextDialogue();
+                renderer.menuOptions = menuDialogueChar;
+                renderer.dialogue = dialogueSystem.MenuDialogue();
+                renderer.isRenderingMenu = true;
+                isInMenu = true;
+                playerChoiceNumber = 0;
             }
-            if (e.KeyCode == Keys.E)
+            else if(dialogue == "MENU2")
             {
-                //inventory.PrintAllItems();
-                CheckTiles();
+                currentSpace = 5;
+                gc.dialougueArrow.rectangle = new Rectangle(117, 5, 8, 8);
+                renderer.menuOptions = menuDialogueItems;
+                renderer.dialogue = dialogueSystem.MenuDialogue();
+                renderer.isRenderingMenu = true;
+                isInMenu = true;
+                playerChoiceNumber = 0;
             }
+            else if( dialogue == "ENDDIA")
+            {
+                dialogueSystem = dialogueLibrary.EndDialogue(playersChoices, hasNote);
+            }
+            else if (dialogue == "END")
+            {
+                Application.Restart();
+            }
+            else if (dialogue == "*Door opens*")
+            {
+                var speaker = dialogueSystem.GetSpeaker();
+                renderer.dialogue = dialogue;
+                renderer.speaker = speaker;
+                gc.blackScreen.rectangle = new Rectangle(0, 0, 0, 0);
+            }
+            else
+            {
+                var speaker = dialogueSystem.GetSpeaker();
+                isInMenu = false;
+                renderer.dialogue = dialogue;
+                renderer.speaker = speaker;
+                renderer.isRenderingMenu = false;
+            }
+
         }
 
         internal RectangleF GetPlayerLocation()
@@ -127,26 +257,26 @@ namespace GameJam
             tx.rectangle.Contains((int)player.rectangle.X, (int)newBottom))
             &&
             world.characters.ContainsKey(tx.graphic)
-            ))
-                .FirstOrDefault();
-            if (next == null) return;
+            )).FirstOrDefault();
 
+            if (next == null) return;
             interactiveSystem.Interact(next.graphic);
         }
 
         private void MovePlayer(int x, int y)
         {
+            if (renderer.isRenderingDialogue) return;
             RenderObject player = gc.player;
             float newx = player.rectangle.X + (x * gc.tileSize);
             float newy = player.rectangle.Y + (y * gc.tileSize);
 
             Tile next = gc.room.tiles.SelectMany(ty => ty.Where(tx => tx.rectangle.Contains((int)newx, (int)newy))).FirstOrDefault();
 
-            bool isChar = world.characters.ContainsKey(next.graphic);
-            bool isItem = world.worldItems.ContainsKey(next.graphic);
             if (next != null)
             {
-                if (next.graphic == 'D')
+                bool isChar = world.characters.ContainsKey(next.graphic);
+                bool isItem = world.worldItems.ContainsKey(next.graphic);
+                if (next.graphic == ']')
                 {
                     EnterRoom(x, y, player);
                 }
