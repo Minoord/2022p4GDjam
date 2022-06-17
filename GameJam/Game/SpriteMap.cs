@@ -11,6 +11,7 @@ namespace GameJam.Game
         private readonly Rectangle[] dialogue;
         private readonly Rectangle[] menu;
         private readonly Rectangle[] dialogueArrow;
+        private readonly Rectangle[] blackscreen;
 
         internal SpriteMap()
         {
@@ -58,6 +59,11 @@ namespace GameJam.Game
             {
                 new Rectangle(210, 68, 24, 24)
             };
+
+            blackscreen = new Rectangle[]
+            {
+                new Rectangle(2, 75, 16, 16)
+            };
         }
 
         internal Dictionary<char, Rectangle> GetMap()
@@ -83,6 +89,10 @@ namespace GameJam.Game
         internal Rectangle[] GetDialogueArrow()
         {
             return dialogueArrow;
+        }
+        internal Rectangle[] GetBlackScreen()
+        {
+            return blackscreen;
         }
     }
 

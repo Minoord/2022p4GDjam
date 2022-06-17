@@ -97,6 +97,12 @@ namespace GameJam
                 rectangle = new Rectangle(112, 0, 50, 80),
             };
 
+            gc.blackScreen = new RenderObject()
+            {
+                frames = gc.spriteMap.GetBlackScreen(),
+                rectangle = new Rectangle(0, 0, 300, 300),
+            };
+
             Item magnifyingGlass = new Item("Magnifying Glass", "A tool used to inspect things up close.");
             inventory.AddItem(magnifyingGlass);
             dialogueSystem = dialogueLibrary.BeginDialogue();
@@ -182,7 +188,6 @@ namespace GameJam
                 isInMenu = false;
                 menuDialogueItems.Clear();
                 menuDialogueChar.Clear();
-
             }
             if (dialogue == "MENU1")
             {
@@ -209,6 +214,13 @@ namespace GameJam
             else if (dialogue == "END")
             {
                 Application.Restart();
+            }
+            else if (dialogue == "*Door opens*")
+            {
+                var speaker = dialogueSystem.GetSpeaker();
+                renderer.dialogue = dialogue;
+                renderer.speaker = speaker;
+                gc.blackScreen.rectangle = new Rectangle(0, 0, 0, 0);
             }
             else
             {

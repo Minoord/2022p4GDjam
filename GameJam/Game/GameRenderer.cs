@@ -56,6 +56,7 @@ namespace GameJam.Game
             Graphics g = InitGraphics(e);
             RenderRoom(g);
             RenderObject(g, context.player);
+            RenderObject(g, context.blackScreen);
 
             if (dialogue == null) isRenderingDialogue = false;
             if (!isRenderingDialogue) return;
