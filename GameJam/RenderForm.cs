@@ -168,7 +168,6 @@ namespace GameJam
                 }
                 gc.dialougueArrow.rectangle = new Rectangle(117, currentSpace, 8, 8);
             }
-            Console.WriteLine(renderer.menuOptions.Count + ":" + renderer.menuOptions[playerChoiceNumber]);
         }
 
         public void PlayDialogue()
@@ -193,12 +192,13 @@ namespace GameJam
             }
             else if(dialogue == "MENU2")
             {
+                currentSpace = 5;
+                gc.dialougueArrow.rectangle = new Rectangle(117, 5, 8, 8);
                 renderer.menuOptions = menuDialogueItems;
                 renderer.dialogue = dialogueSystem.MenuDialogue();
                 renderer.isRenderingMenu = true;
                 isInMenu = true;
                 playerChoiceNumber = 0;
-                gc.dialougueArrow.rectangle = new Rectangle(117, 5, 8, 8);
             }
             else if( dialogue == "ENDDIA")
             {
