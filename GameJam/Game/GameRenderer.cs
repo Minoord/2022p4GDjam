@@ -102,8 +102,8 @@ namespace GameJam.Game
         }
         private void RenderDialogue(Graphics g, string dialogue, string speaker)
         {
-            g.DrawString(speaker, font, colourBrush , new Point(15,80));
-            g.DrawString(dialogue, font, colourBrush , new Point(15,90));
+            g.DrawString(speaker, font, colourBrush , new Point(5,80));
+            g.DrawString(dialogue, font, colourBrush , new Point(5,90));
         }
 
         public void Dispose()
