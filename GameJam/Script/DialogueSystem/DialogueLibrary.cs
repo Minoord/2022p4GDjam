@@ -125,10 +125,10 @@ namespace GameJam.Game
             dialogueSystem.AddDialogue("So Shroomlock have you found your \nevidence?", Characters.Hammer_Bro);
             dialogueSystem.AddDialogue("yes, lets proceed to the judging.", Characters.Shroomlock);
             dialogueSystem.AddDialogue("who is the murderer?", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("MENU1", Characters.Ba);
-            dialogueSystem.AddDialogue("which weapon did he use?", Characters.Ba);
-            dialogueSystem.AddDialogue("MENU2", Characters.Ba);
-            dialogueSystem.AddDialogue("ENDDIA", Characters.Ba);
+            dialogueSystem.AddDialogue("MENU1", Characters.Hammer_Bro);
+            dialogueSystem.AddDialogue("which weapon did he use?", Characters.Hammer_Bro);
+            dialogueSystem.AddDialogue("MENU2", Characters.Hammer_Bro);
+            dialogueSystem.AddDialogue("ENDDIA", Characters.Hammer_Bro);
 
             return dialogueSystem;
         }        
