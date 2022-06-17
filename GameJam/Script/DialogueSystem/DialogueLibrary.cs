@@ -194,7 +194,7 @@ namespace GameJam.Game
             dialogueSystem.AddDialogue("Could you describe what you \nwitnessed?", Characters.Shroomlock);
             dialogueSystem.AddDialogue("Ba ba baaa, ba ba ba ba", Characters.Ba);
             dialogueSystem.AddDialogue("happend excatly", Characters.Goom);
-            dialogueSystem.AddDialogue("beg my pardon, what did he just say?", Characters.Goom);
+            dialogueSystem.AddDialogue("beg my pardon, what did he just say?", Characters.Shroomlock);
             dialogueSystem.AddDialogue("Ba ba baaaa, ba ba ba ba", Characters.Ba);
             dialogueSystem.AddDialogue("(I have no idea what he is saying,\nim gonna leave him alone)", Characters.Shroomlock);
             dialogueSystem.AddDialogue("Thank you for your cooperation.", Characters.Shroomlock);
