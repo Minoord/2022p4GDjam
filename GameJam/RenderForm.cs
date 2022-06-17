@@ -53,6 +53,8 @@ namespace GameJam
         private void RenderForm_Load(object sender, EventArgs e)
         {
             inventory = new Inventory();
+            Item magnifyingGlass = new Item("Magnifying Glass", "A tool used to inspect things up close.");
+            inventory.AddItem(magnifyingGlass);
             world = new World(gc);
             interactiveSystem = new InteractiveSystem(this, inventory, world);
 
