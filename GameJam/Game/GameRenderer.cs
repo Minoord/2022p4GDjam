@@ -21,6 +21,7 @@ namespace GameJam.Game
 
         public DialogueSystem dialogueSystem;
         public string dialogue;
+        public string speaker;
 
         public bool isRenderingDialogue;
         public bool isRenderingMenu;
@@ -59,7 +60,7 @@ namespace GameJam.Game
             if (dialogue == null) isRenderingDialogue = false;
             if (!isRenderingDialogue) return;
             RenderObject(g, context.dialougue);
-            RenderDialogue(g, dialogue);
+            RenderDialogue(g, dialogue, speaker);
             if (!isRenderingMenu) return;
             RenderObject(g, context.menu);
             RenderObject(g, context.dialougueArrow);
@@ -99,8 +100,9 @@ namespace GameJam.Game
                 g.DrawString(strings, font, colourBrush, new Point(127, currentspace));
             }
         }
-        private void RenderDialogue(Graphics g, string dialogue)
+        private void RenderDialogue(Graphics g, string dialogue, string speaker)
         {
+            g.DrawString(speaker, font, colourBrush , new Point(5,80));
             g.DrawString(dialogue, font, colourBrush , new Point(5,90));
         }
 

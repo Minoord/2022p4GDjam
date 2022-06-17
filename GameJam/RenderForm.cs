@@ -84,7 +84,7 @@ namespace GameJam
             gc.dialougue = new RenderObject()
             {
                 frames = gc.spriteMap.GetDialoguePosition(),
-                rectangle = new Rectangle(0, 80, 160, 40),
+                rectangle = new Rectangle(0, 73, 160, 40),
             };
 
             gc.dialougueArrow = new RenderObject()
@@ -156,7 +156,7 @@ namespace GameJam
                 if (playerChoiceNumber < 0)
                 {
                     playerChoiceNumber = renderer.menuOptions.Count - 1;
-                    currentSpace = 65;
+                    currentSpace = 5 + (playerChoiceNumber * 10);
                 }
                 gc.dialougueArrow.rectangle = new Rectangle(117, currentSpace, 8, 8);
             }
@@ -213,8 +213,10 @@ namespace GameJam
             }
             else
             {
+                var speaker = dialogueSystem.GetSpeaker();
                 isInMenu = false;
                 renderer.dialogue = dialogue;
+                renderer.speaker = speaker;
                 renderer.isRenderingMenu = false;
             }
 
