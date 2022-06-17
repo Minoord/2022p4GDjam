@@ -324,9 +324,9 @@ namespace GameJam.Game
             if (hasSuicideNote)
             {
                 dialogueSystem.AddDialogue("*Everybody in the room went silent*", Characters.Narrator);
-                dialogueSystem.AddDialogue("Dont believe me, thats fine but mabye this will change your mind", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("Dont believe me, thats fine \nbut mabye this will change your mind", Characters.Shroomlock);
                 dialogueSystem.AddDialogue("*Shroomlock shows the suicide note*", Characters.Narrator);
-                dialogueSystem.AddDialogue("Mario committed suicide and someone tried covering it up", Characters.Shroomlock);
+                dialogueSystem.AddDialogue("Mario committed suicide and \nsomeone tried covering it up", Characters.Shroomlock);
                 dialogueSystem.AddDialogue("Who that person is I have no idea", Characters.Shroomlock);
                 dialogueSystem.AddDialogue("But I'll leave that to the police", Characters.Shroomlock);
 
