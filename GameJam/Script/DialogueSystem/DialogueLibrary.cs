@@ -34,6 +34,9 @@ namespace GameJam.Game
                 case Characters.Ba:
                     return BaDialogue();
                     break;
+                case Characters.Mario:
+                    return MarioDialogue();
+                    break;
                 default:
                     return BeginDialogue();
                     break;
@@ -46,20 +49,33 @@ namespace GameJam.Game
             dialogueSystem.AddDialogue("Enter Werkt ook", Characters.Ba);
             return dialogueSystem;
         }
+
+        public DialogueSystem MarioDialogue()
+        {
+            DialogueSystem dialogueSystem = new DialogueSystem();
+            dialogueSystem.AddDialogue("(Shroomlock examens Mario's body)", Characters.Narrator);
+            dialogueSystem.AddDialogue("He has a deep wound precisely \nwhere the heart is", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("From the looks of it the murder \nmust have attacked from the front. ", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("He also doesnt have any bruises", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("That must mean that the wound by\nhis heart was the final blow", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("What could have caused this?", Characters.Shroomlock);
+
+            return dialogueSystem;
+        }
         public DialogueSystem LuigiDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Goodday Luigi, Can I ask you a few questions?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Goodday Luigi, Can I ask you a \nfew questions?", Characters.Shroomlock);
             dialogueSystem.AddDialogue("I didnt do it i swear!", Characters.Luigi);
-            dialogueSystem.AddDialogue("I didn't accused you yet, why are you so nervous?", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("Well...When the lights went out, i panicked and bumped into Mario", Characters.Luigi);
-            dialogueSystem.AddDialogue("I fell down on the floor, then when i tried getting up, the lights went on", Characters.Luigi);
-            dialogueSystem.AddDialogue("and my brother was..was dead beside me. *Starts crying*", Characters.Luigi);
-            dialogueSystem.AddDialogue("you were beside him before the lights went out right?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("I didn't accused you yet, \nwhy are you so nervous?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Well...When the lights went out, \nI panicked and bumped into Mario", Characters.Luigi);
+            dialogueSystem.AddDialogue("I fell down on the floor, \nthen when i tried getting up, \nthe lights went on", Characters.Luigi);
+            dialogueSystem.AddDialogue("and my brother was..was dead beside \nme. *Starts crying*", Characters.Luigi);
+            dialogueSystem.AddDialogue("you were beside him before the \nlights went out right?", Characters.Shroomlock);
             dialogueSystem.AddDialogue("sniff..sniff..yes", Characters.Luigi);
             dialogueSystem.AddDialogue("(So my highness wasn't lying)", Characters.Shroomlock);
             dialogueSystem.AddDialogue("thank you for your time Luigi,", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("I will bring Mario's murder to justice", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("I will bring Mario's murder to \njustice", Characters.Shroomlock);
             dialogueSystem.AddDialogue("thank you...sniff.sniff", Characters.Luigi);
             return dialogueSystem;
         }
@@ -106,12 +122,12 @@ namespace GameJam.Game
         public DialogueSystem Hammer_BroDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Im Hammer Bro", Characters.Ba);
-            dialogueSystem.AddDialogue("Who is the murderer", Characters.Ba);
+            dialogueSystem.AddDialogue("So Shroomlock have you found your \nevidence?", Characters.Hammer_Bro);
+            dialogueSystem.AddDialogue("yes, lets proceed to the judging.", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("who is the murderer?", Characters.Shroomlock);
             dialogueSystem.AddDialogue("MENU1", Characters.Ba);
-            dialogueSystem.AddDialogue("You?", Characters.Ba);
+            dialogueSystem.AddDialogue("which weapon did he use?", Characters.Ba);
             dialogueSystem.AddDialogue("MENU2", Characters.Ba);
-            dialogueSystem.AddDialogue("With this weapon?", Characters.Ba);
             dialogueSystem.AddDialogue("ENDDIA", Characters.Ba);
 
             return dialogueSystem;
@@ -173,8 +189,8 @@ namespace GameJam.Game
             var chara = answer[0];
             hasSuicideNote = hasNote;
 
-            dialogueSystem.AddDialogue("Mario has been murderd by  " +  chara, Characters.Ba);
-            dialogueSystem.AddDialogue("using a " + item, Characters.Ba);
+            dialogueSystem.AddDialogue("Mario has been murderd by  " +  chara, Characters.Shroomlock);
+            dialogueSystem.AddDialogue("using a " + item, Characters.Shroomlock);
             ItemCheckDialogue(dialogueSystem,item, chara);
          
             return dialogueSystem;
