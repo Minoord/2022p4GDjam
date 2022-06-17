@@ -99,6 +99,8 @@ namespace GameJam
 
             Item magnifyingGlass = new Item("Magnifying Glass", "A tool used to inspect things up close.");
             inventory.AddItem(magnifyingGlass);
+            dialogueSystem = dialogueLibrary.BeginDialogue();
+            PlayDialogue();
         }
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
