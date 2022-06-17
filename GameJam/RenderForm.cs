@@ -95,8 +95,8 @@ namespace GameJam
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (!isSpeaking)
-            {
+         
+            
                 if (e.KeyCode == Keys.W)
                 {
                     MovePlayer(0, -1);
@@ -117,10 +117,8 @@ namespace GameJam
                 {
                     inventory.PrintAllItems();
                     CheckTiles();
-                }
-            }
-            else
-            {
+               }
+            
                 if (e.KeyCode == Keys.Return && !isInMenu)
                 {
                     PlayDialogue();
@@ -129,8 +127,7 @@ namespace GameJam
                 {
                     inMenu(e);
                 }
-            }
-
+            
 
         }
 
@@ -162,10 +159,9 @@ namespace GameJam
             if (dialogueSystem == null) return;
             renderer.isRenderingDialogue = true;
             var dialogue = dialogueSystem.NextDialogue();
-            if (dialogue == null)
+            if (dialogue == "null")
             {
                 isInMenu = false;
-                isSpeaking = false;
                 menuDialogueItems.Clear();
                 menuDialogueChar.Clear();
             }
@@ -176,7 +172,6 @@ namespace GameJam
                 renderer.isRenderingMenu = true;
                 isInMenu = true;
                 playerChoiceNumber = 0;
-                isSpeaking = true;
             }
             else if(dialogue == "MENU2")
             {
@@ -185,12 +180,10 @@ namespace GameJam
                 renderer.isRenderingMenu = true;
                 isInMenu = true;
                 playerChoiceNumber = 0;
-                isSpeaking = true;
             }
             else if( dialogue == "ENDDIA")
             {
                 dialogueSystem = dialogueLibrary.EndDialogue(playersChoices, false);
-                isSpeaking = true;
             }
             else if (dialogue == "END")
             {
@@ -201,7 +194,6 @@ namespace GameJam
                 isInMenu = false;
                 renderer.dialogue = dialogue;
                 renderer.isRenderingMenu = false;
-                isSpeaking = true;
             }
 
         }
