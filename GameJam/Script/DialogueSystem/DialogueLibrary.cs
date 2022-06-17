@@ -229,6 +229,12 @@ namespace GameJam.Game
                     dialogueSystem.AddDialogue("if the murdrer used the gun a bullet \nshould have been found", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
                     break;
+                case "Magnifying Glass":
+                    dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
+                    dialogueSystem.AddDialogue("You brought that item into the room", Characters.Bowser);
+                    dialogueSystem.AddDialogue("So if thats the murder weapon than \nyour the murderer!", Characters.Bowser);
+                    DefeatDialogue(dialogueSystem);
+                    break;
             }
         }
 
