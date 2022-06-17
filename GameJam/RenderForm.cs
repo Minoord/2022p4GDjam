@@ -149,8 +149,6 @@ namespace GameJam
             {
                 playerChoiceNumber += 1;
                 if (playerChoiceNumber >= renderer.menuOptions.Count) playerChoiceNumber = 0;
-
-                CheckTiles();
             }
         }
 
@@ -159,11 +157,12 @@ namespace GameJam
             if (dialogueSystem == null) return;
             renderer.isRenderingDialogue = true;
             var dialogue = dialogueSystem.NextDialogue();
-            if (dialogue == "null")
+            if (dialogue == null)
             {
                 isInMenu = false;
                 menuDialogueItems.Clear();
                 menuDialogueChar.Clear();
+
             }
             if (dialogue == "MENU1")
             {
