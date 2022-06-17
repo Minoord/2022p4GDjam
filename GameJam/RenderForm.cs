@@ -18,12 +18,23 @@ namespace GameJam
         private Inventory inventory;
         private LevelLoader levelLoader;
         private float frametime;
-        private bool isSpeaking { get; set; }
+        public bool isSpeaking;
+        private bool isInMenu { get; set; }
+        private bool itemIsCorrectly;
+        private bool charIsCorrectly;
 
         public DialogueLibrary dialogueLibrary = new DialogueLibrary();
         public DialogueSystem dialogueSystem;
         private GameRenderer renderer;
         private readonly GameContext gc = new GameContext();
+
+        public List<string> menuDialogueItems = new List<string>();
+        public List<string> menuDialogueChar = new List<string>();
+        private List<string> playersChoices = new List<string>();
+
+        private int playerChoiceNumber = 0;
+
+        private int currentSpace = 5;
 
         public RenderForm()
         {
@@ -75,45 +86,138 @@ namespace GameJam
                 frames = gc.spriteMap.GetDialoguePosition(),
                 rectangle = new Rectangle(0, 80, 160, 40),
             };
+
+            gc.dialougueArrow = new RenderObject()
+            {
+                frames = gc.spriteMap.GetDialogueArrow(),
+                rectangle = new Rectangle(117, currentSpace, 8, 8),
+            };
+
+            gc.menu = new RenderObject()
+            {
+                frames = gc.spriteMap.GetMenuPosition(),
+                rectangle = new Rectangle(112, 0, 50, 80),
+            };
+
+
+
         }
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.W)
+         
+            
+                if (e.KeyCode == Keys.W)
+                {
+                    MovePlayer(0, -1);
+                }
+                else if (e.KeyCode == Keys.S)
+                {
+                    MovePlayer(0, 1);
+                }
+                else if (e.KeyCode == Keys.A)
+                {
+                    MovePlayer(-1, 0);
+                }
+                else if (e.KeyCode == Keys.D)
+                {
+                    MovePlayer(1, 0);
+                }
+                else if (e.KeyCode == Keys.E)
+                {
+                    inventory.PrintAllItems();
+                    CheckTiles();
+               }
+            
+                if (e.KeyCode == Keys.Return && !isInMenu)
+                {
+                    PlayDialogue();
+                }
+                else if (isInMenu)
+                {
+                    inMenu(e);
+                }
+            
+
+        }
+
+        public void inMenu(KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Return)
             {
-                MovePlayer(0, -1);
-            }
-            else if (e.KeyCode == Keys.S)
-            {
-                MovePlayer(0, 1);
-            }
-            else if (e.KeyCode == Keys.A)
-            {
-                MovePlayer(-1, 0);
-            }
-            else if (e.KeyCode == Keys.D)
-            {
-                MovePlayer(1, 0);
-            }
-            else if (e.KeyCode == Keys.Enter || isSpeaking)
-            {
+                playersChoices.Add(renderer.menuOptions[playerChoiceNumber]);
                 PlayDialogue();
+                isInMenu = false;
             }
-            if (e.KeyCode == Keys.E)
+            else if (e.KeyCode == Keys.Up)
             {
-                CheckTiles();
+                playerChoiceNumber -= 1;
+                currentSpace -= 10;
+                if (playerChoiceNumber < 0)
+                {
+                    playerChoiceNumber = renderer.menuOptions.Count - 1;
+                    currentSpace = 65;
+                }
+                gc.dialougueArrow.rectangle = new Rectangle(117, currentSpace, 8, 8);
             }
-            if (e.KeyCode == Keys.I)
+            else if (e.KeyCode == Keys.Down)
             {
-                inventory.PrintAllItems();
+                playerChoiceNumber += 1;
+                currentSpace += 10;
+                if (playerChoiceNumber >= renderer.menuOptions.Count)
+                {
+                    playerChoiceNumber = 0;
+                    currentSpace = 5;
+                }
+                gc.dialougueArrow.rectangle = new Rectangle(117, currentSpace, 8, 8);
             }
+            Console.WriteLine(renderer.menuOptions.Count + ":" + renderer.menuOptions[playerChoiceNumber]);
         }
 
         public void PlayDialogue()
         {
             if (dialogueSystem == null) return;
             renderer.isRenderingDialogue = true;
-            renderer.dialogue = dialogueSystem.NextDialogue();
+            var dialogue = dialogueSystem.NextDialogue();
+            if (dialogue == null)
+            {
+                isInMenu = false;
+                menuDialogueItems.Clear();
+                menuDialogueChar.Clear();
+
+            }
+            if (dialogue == "MENU1")
+            {
+                renderer.menuOptions = menuDialogueChar;
+                renderer.dialogue = dialogueSystem.MenuDialogue();
+                renderer.isRenderingMenu = true;
+                isInMenu = true;
+                playerChoiceNumber = 0;
+            }
+            else if(dialogue == "MENU2")
+            {
+                renderer.menuOptions = menuDialogueItems;
+                renderer.dialogue = dialogueSystem.MenuDialogue();
+                renderer.isRenderingMenu = true;
+                isInMenu = true;
+                playerChoiceNumber = 0;
+                gc.dialougueArrow.rectangle = new Rectangle(117, 5, 8, 8);
+            }
+            else if( dialogue == "ENDDIA")
+            {
+                dialogueSystem = dialogueLibrary.EndDialogue(playersChoices, false);
+            }
+            else if (dialogue == "END")
+            {
+                Application.Restart();
+            }
+            else
+            {
+                isInMenu = false;
+                renderer.dialogue = dialogue;
+                renderer.isRenderingMenu = false;
+            }
+
         }
 
         internal RectangleF GetPlayerLocation()

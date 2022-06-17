@@ -27,8 +27,28 @@ namespace GameJam
         {
             Characters character = world.characters[c];
 
+            // Call Dialogue System here
+            renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
+            renderForm.isSpeaking = true;
+            renderForm.PlayDialogue();
+            foreach(var item in inventory.inventory)
+            {
+                renderForm.menuDialogueItems.Add(item.Key);
+            }
+            foreach (var chara in world.characters)
+            {
+                var charName = chara.Value.ToString();
+                bool isShroomlock = charName == "Shroomlock";
+                bool isHammerBro = charName == "Hammer_Bro";
+               if (!isShroomlock && !isHammerBro) renderForm.menuDialogueChar.Add(charName);
+            }
+
+            // Mark Debug Begin
+            Console.WriteLine(character);
+            // Mark Debug End
             renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
             renderForm.PlayDialogue();
+
         }
 
         internal void PickUp(char c)
