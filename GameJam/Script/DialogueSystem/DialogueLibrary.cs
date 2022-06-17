@@ -49,24 +49,58 @@ namespace GameJam.Game
         public DialogueSystem LuigiDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Im Luigi", Characters.Ba);
-            dialogueSystem.AddDialogue("Im his brother", Characters.Ba);
+            dialogueSystem.AddDialogue("Goodday Luigi, Can I ask you a few questions?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("I didnt do it i swear!", Characters.Luigi);
+            dialogueSystem.AddDialogue("I didn't accused you yet, why are you so nervous?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Well...When the lights went out, i panicked and bumped into Mario", Characters.Luigi);
+            dialogueSystem.AddDialogue("I fell down on the floor, then when i tried getting up, the lights went on", Characters.Luigi);
+            dialogueSystem.AddDialogue("and my brother was..was dead beside me. *Starts crying*", Characters.Luigi);
+            dialogueSystem.AddDialogue("you were beside him before the lights went out right?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("sniff..sniff..yes", Characters.Luigi);
+            dialogueSystem.AddDialogue("(So my highness wasn't lying)", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("thank you for your time Luigi,", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("I will bring Mario's murder to justice", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("thank you...sniff.sniff", Characters.Luigi);
             return dialogueSystem;
         }
 
         public DialogueSystem DaisyDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Im Daisy", Characters.Ba);
-            dialogueSystem.AddDialogue("Im his friend", Characters.Ba);
+            dialogueSystem.AddDialogue("Goodday princess, Can I ask you a \nfew questions?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Yes you may", Characters.Daisy);
+            dialogueSystem.AddDialogue("were you in the room when the murder\nhappend?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Yes and i already know who did it", Characters.Daisy);
+            dialogueSystem.AddDialogue("If I may ask who did it then?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Well uhm...Bowser ofcourse!", Characters.Daisy);
+            dialogueSystem.AddDialogue("He has always been the villian", Characters.Daisy);
+            dialogueSystem.AddDialogue("So he could do it again", Characters.Daisy);
+            dialogueSystem.AddDialogue("That doesnt mean he murdered Mario", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Are you questioning me?", Characters.Daisy);
+            dialogueSystem.AddDialogue("I'm sorry, princess, but can I ask\nyou another question?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Fine but then leave me alone i have\nbeter things to do, like mourning", Characters.Daisy);
+            dialogueSystem.AddDialogue("Before the lights went out where \nwere you standing?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Behind Mario ofcourse,i didn't trust\nBowser the second i was in the room\nwith him.", Characters.Daisy);
+            dialogueSystem.AddDialogue("Mario probably died to protect me\nfrom him. What a true hero!", Characters.Daisy);
+            dialogueSystem.AddDialogue("Oke thank you, princess.\nThis really helped", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("(it really didn't)", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("yeah yeah now go I need to mourn", Characters.Daisy);
             return dialogueSystem;
         }        
         
         public DialogueSystem PeachDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Im Peach", Characters.Ba);
-            dialogueSystem.AddDialogue("Im his girlfriend", Characters.Ba);
+            dialogueSystem.AddDialogue("Sorry to bother you, your highness", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("But i have some questions for you.", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("sniff..sniff..Go ahead", Characters.Peach);
+            dialogueSystem.AddDialogue("What happend when the lights went\nout?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("I heard two thud sound next to me ", Characters.Peach);
+            dialogueSystem.AddDialogue("and next thing i know the lights\nwent on", Characters.Peach);
+            dialogueSystem.AddDialogue("and Mario was dead on the floor", Characters.Peach);
+            dialogueSystem.AddDialogue("Your highness was standing besides \nhim,if I recall that correctly?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("yes, yes i was", Characters.Peach);
+            dialogueSystem.AddDialogue("Oke thank you for your time,\nyour highness", Characters.Shroomlock);
             return dialogueSystem;
         }       
         public DialogueSystem Hammer_BroDialogue()
@@ -85,22 +119,50 @@ namespace GameJam.Game
         public DialogueSystem BowserDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Im Bowser", Characters.Ba);
-            dialogueSystem.AddDialogue("Im the villain", Characters.Ba);
+            dialogueSystem.AddDialogue("Bowser, Mario's biggest enemy", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Scram off Toad", Characters.Bowser);
+            dialogueSystem.AddDialogue("Did you just call me Toad?\nI have you know that my_", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Yeah yeah, now buzz off,\nim busy trying to solve the murder", Characters.Bowser);
+            dialogueSystem.AddDialogue("Why are you going to solve the\nmurder?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Because otherwise i would get the\nblame for it", Characters.Bowser);
+            dialogueSystem.AddDialogue("Now i give you 5 seconds to go\nbother someone else", Characters.Bowser);
+            dialogueSystem.AddDialogue("or there will be a second dead body\nin this room.", Characters.Bowser);
+            dialogueSystem.AddDialogue("(I should leave him alone)", Characters.Shroomlock);
             return dialogueSystem;
         }        
         public DialogueSystem GoomDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Im Goom", Characters.Ba);
-            dialogueSystem.AddDialogue("Im smart", Characters.Ba);
+            dialogueSystem.AddDialogue("Hello, were you in the room when the\nmurder happend", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Yes", Characters.Goom);
+            dialogueSystem.AddDialogue("Could you describe what you\nwitnessed?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Were talking, lights went out,\nheard loud noise,", Characters.Goom);
+            dialogueSystem.AddDialogue("lights went on, Mario dead", Characters.Goom);
+            dialogueSystem.AddDialogue("What was the loud noise?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Sound like.... ", Characters.Goom);
+            dialogueSystem.AddDialogue("Baa ba", Characters.Ba);
+            dialogueSystem.AddDialogue("you right, Ba", Characters.Goom);
+            dialogueSystem.AddDialogue("Sound like someone hit floor", Characters.Goom);
+            dialogueSystem.AddDialogue("Where were you standing when lights\nwhen out?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("standing in front, next to Boss?", Characters.Goom);
+            dialogueSystem.AddDialogue("Thank you for your cooperation!", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Problem no for me", Characters.Goom);
             return dialogueSystem;
         }        
         public DialogueSystem BaDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Ba!!!", Characters.Ba);
-            dialogueSystem.AddDialogue("Ba Ba Ba", Characters.Ba);
+            dialogueSystem.AddDialogue("Hello, were you in the room when the\nmurder happend", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Ba", Characters.Ba);
+            dialogueSystem.AddDialogue("(I am taking that as a yes)", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Could you describe what you \nwitnessed?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Ba ba baaa, ba ba ba ba", Characters.Ba);
+            dialogueSystem.AddDialogue("happend excatly", Characters.Goom);
+            dialogueSystem.AddDialogue("beg my pardon, what did he just say?", Characters.Goom);
+            dialogueSystem.AddDialogue("Ba ba baaaa, ba ba ba ba", Characters.Ba);
+            dialogueSystem.AddDialogue("(I have no idea what he is saying,\nim gonna leave him alone)", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Thank you for your cooperation.", Characters.Shroomlock);
+
             return dialogueSystem;
         }
         
