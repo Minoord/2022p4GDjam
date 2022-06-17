@@ -240,9 +240,9 @@ namespace GameJam.Game
                     WinDialogue(dialogueSystem);
                     break;
                 case "Peach":
-                    dialogueSystem.AddDialogue("Shroomlock how could you say that I murderd him!", Characters.Peach);
-                    dialogueSystem.AddDialogue("(She is right how could I say that, She couldn't have stab him precisely in the heart)", Characters.Shroomlock);
-                    dialogueSystem.AddDialogue("(Because it was to dark to see, where he was)", Characters.Shroomlock);
+                    dialogueSystem.AddDialogue("Shroomlock how could you say that I \nmurderd him!", Characters.Peach);
+                    dialogueSystem.AddDialogue("(She is right how could I say that, \nShe couldn't have stab him precisely \nin the heart)", Characters.Shroomlock);
+                    dialogueSystem.AddDialogue("(Because it was to dark to see, \nwhere he was)", Characters.Shroomlock);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Daisy":
@@ -252,19 +252,19 @@ namespace GameJam.Game
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Luigi":
-                    dialogueSystem.AddDialogue("Me?, I killed my brother?, but i only bumped into him", Characters.Luigi);
-                    dialogueSystem.AddDialogue("(A bumped couldn't have killed Mario,)", Characters.Shroomlock);
-                    dialogueSystem.AddDialogue("(besides when the light went on Luigi was also on the floor)", Characters.Shroomlock);
-                    dialogueSystem.AddDialogue("(If he did it he should have been coverd in blood)", Characters.Shroomlock);
+                    dialogueSystem.AddDialogue("Me?, I killed my brother?, \nbut i only bumped into him", Characters.Luigi);
+                    dialogueSystem.AddDialogue("(A bumped couldn't have killed Mario)", Characters.Shroomlock);
+                    dialogueSystem.AddDialogue("(besides when the light went on \nLuigi was also on the floor)", Characters.Shroomlock);
+                    dialogueSystem.AddDialogue("(If he did it he should have been \ncoverd in blood)", Characters.Shroomlock);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Bowser":
-                    dialogueSystem.AddDialogue("ME!? HOW YOU DARE SAY ME. MABYE I AM THE VILLIAN ", Characters.Bowser);
-                    dialogueSystem.AddDialogue("BUT I DIDN'T KILL HIM! I'LL TELL YOU WHY", Characters.Bowser);
+                    dialogueSystem.AddDialogue("ME!? HOW YOU DARE SAY ME.\nMABYE I AM THE VILLIAN ", Characters.Bowser);
+                    dialogueSystem.AddDialogue("BUT I DIDN'T KILL HIM! \nI'LL TELL YOU WHY", Characters.Bowser);
                     dialogueSystem.AddDialogue("When the lights went out", Characters.Bowser);
-                    dialogueSystem.AddDialogue("I was right infront of him. In the dark ", Characters.Bowser);
-                    dialogueSystem.AddDialogue("would have been hard to get to him and stab him in the heart", Characters.Bowser);
-                    dialogueSystem.AddDialogue("He is right", Characters.Shroomlock);
+                    dialogueSystem.AddDialogue("I was right infront of him. \nIn the dark ", Characters.Bowser);
+                    dialogueSystem.AddDialogue("would have been hard to get to him \nand stab him in the heart", Characters.Bowser);
+                    dialogueSystem.AddDialogue("(He is right)", Characters.Shroomlock);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Goom":
@@ -287,8 +287,8 @@ namespace GameJam.Game
         }
         private void DefeatDialogue(DialogueSystem dialogueSystem)
         {
-            dialogueSystem.AddDialogue("It seems I missed something, let me relook the case ", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("You failed to catch the murderer, press enter to restart", Characters.Narrator);
+            dialogueSystem.AddDialogue("It seems I missed something, \nlet me relook the case ", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("You failed to catch the murderer, \npress enter to restart", Characters.Narrator);
             dialogueSystem.AddDialogue("END", Characters.Narrator);
             
         }
