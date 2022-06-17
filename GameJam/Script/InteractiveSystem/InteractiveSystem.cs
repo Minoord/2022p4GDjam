@@ -45,9 +45,6 @@ namespace GameJam
                if (!isShroomlock && !isHammerBro) renderForm.menuDialogueChar.Add(charName);
             }
 
-            // Mark Debug Begin
-            Console.WriteLine(character);
-            // Mark Debug End
             renderForm.dialogueSystem = dialogueLibrary.WhichCharacterDialogue(character);
             renderForm.PlayDialogue();
 
@@ -59,9 +56,8 @@ namespace GameJam
 
             inventory.AddItem(world.worldItems[c]);
 
-            // Mark Debug Begin
-            Console.WriteLine("Added " + itemName + " to inventory.");
-            // Mark Debug End
+            renderForm.dialogueSystem = dialogueLibrary.AddedToInventory(itemName);
+            renderForm.PlayDialogue();
         }
     }
 }

@@ -42,6 +42,14 @@ namespace GameJam.Game
                     break;
             }
         }
+
+        public DialogueSystem AddedToInventory(string itemName)
+        {
+            DialogueSystem dialogueSystem = new DialogueSystem();
+            dialogueSystem.AddDialogue("Added " + itemName + " to inventory.", Characters.Narrator);
+            return dialogueSystem;
+        }
+
         public DialogueSystem BeginDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();

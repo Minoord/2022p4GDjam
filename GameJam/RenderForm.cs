@@ -123,7 +123,6 @@ namespace GameJam
                 }
                 else if (e.KeyCode == Keys.E)
                 {
-                    inventory.PrintAllItems();
                     CheckTiles();
                }
             
