@@ -42,11 +42,28 @@ namespace GameJam.Game
                     break;
             }
         }
+
+        public DialogueSystem AddedToInventory(string itemName)
+        {
+            DialogueSystem dialogueSystem = new DialogueSystem();
+            dialogueSystem.AddDialogue("Added " + itemName + " to inventory.", Characters.Narrator);
+            return dialogueSystem;
+        }
+
         public DialogueSystem BeginDialogue()
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
-            dialogueSystem.AddDialogue("Dit is een test of het werk", Characters.Ba);
-            dialogueSystem.AddDialogue("Enter Werkt ook", Characters.Ba);
+            dialogueSystem.AddDialogue("*Ding Dong*", Characters.Narrator);
+            dialogueSystem.AddDialogue("Shroomlock, here. I heard a murder happend here.", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("*Door opens*", Characters.Narrator);
+            dialogueSystem.AddDialogue("*in tears*Shroomlock, please help Mario has been murdered!", Characters.Peach);
+            dialogueSystem.AddDialogue("Your highness, what happend?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("We were having a meeting with Bowser and suddenly the lights went off. When they came back on Mario was dead.", Characters.Peach);
+            dialogueSystem.AddDialogue("Who was standing next to Mario while the meeting was happening?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Me and Luigi..sniff...sniff", Characters.Peach);
+            dialogueSystem.AddDialogue("Thank you your highness, you have done enough now. If i have more questions I will come back to you.", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("(I should talk to the suspects and look around for the murder weapon)", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Talk to Hammer bro if you found out who did it. He will be the final judge", Characters.Narrator);
             return dialogueSystem;
         }
 

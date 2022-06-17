@@ -55,8 +55,6 @@ namespace GameJam
         private void RenderForm_Load(object sender, EventArgs e)
         {
             inventory = new Inventory();
-            Item magnifyingGlass = new Item("Magnifying Glass", "A tool used to inspect things up close.");
-            inventory.AddItem(magnifyingGlass);
             world = new World(gc);
             interactiveSystem = new InteractiveSystem(this, inventory, world);
 
@@ -99,8 +97,8 @@ namespace GameJam
                 rectangle = new Rectangle(112, 0, 50, 80),
             };
 
-
-
+            Item magnifyingGlass = new Item("Magnifying Glass", "A tool used to inspect things up close.");
+            inventory.AddItem(magnifyingGlass);
         }
 
         private void RenderForm_KeyDown(object sender, KeyEventArgs e)
@@ -125,7 +123,6 @@ namespace GameJam
                 }
                 else if (e.KeyCode == Keys.E)
                 {
-                    inventory.PrintAllItems();
                     CheckTiles();
                }
             
