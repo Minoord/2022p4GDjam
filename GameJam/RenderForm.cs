@@ -20,8 +20,7 @@ namespace GameJam
         private float frametime;
         public bool isSpeaking;
         private bool isInMenu { get; set; }
-        private bool itemIsCorrectly;
-        private bool charIsCorrectly;
+        public bool hasNote;
 
         public DialogueLibrary dialogueLibrary = new DialogueLibrary();
         public DialogueSystem dialogueSystem;
@@ -209,7 +208,7 @@ namespace GameJam
             }
             else if( dialogue == "ENDDIA")
             {
-                dialogueSystem = dialogueLibrary.EndDialogue(playersChoices, false);
+                dialogueSystem = dialogueLibrary.EndDialogue(playersChoices, hasNote);
             }
             else if (dialogue == "END")
             {
