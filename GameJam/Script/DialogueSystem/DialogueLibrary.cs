@@ -54,16 +54,19 @@ namespace GameJam.Game
         {
             DialogueSystem dialogueSystem = new DialogueSystem();
             dialogueSystem.AddDialogue("*Ding Dong*", Characters.Narrator);
-            dialogueSystem.AddDialogue("Shroomlock, here. I heard a murder happend here.", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Shroomlock, here. I heard a murder \nhappend here", Characters.Shroomlock);
             dialogueSystem.AddDialogue("*Door opens*", Characters.Narrator);
-            dialogueSystem.AddDialogue("*in tears*Shroomlock, please help Mario has been murdered!", Characters.Peach);
+            dialogueSystem.AddDialogue("*in tears*Shroomlock, please help \nMario has been murdered!", Characters.Peach);
             dialogueSystem.AddDialogue("Your highness, what happend?", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("We were having a meeting with Bowser and suddenly the lights went off. When they came back on Mario was dead.", Characters.Peach);
-            dialogueSystem.AddDialogue("Who was standing next to Mario while the meeting was happening?", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("We were having a meeting with Bowser \nand suddenly the lights went off", Characters.Peach);
+            dialogueSystem.AddDialogue("When they came back on Mario was \ndead.", Characters.Peach);
+            dialogueSystem.AddDialogue("Who was standing next to Mario while \nthe meeting was happening?", Characters.Shroomlock);
             dialogueSystem.AddDialogue("Me and Luigi..sniff...sniff", Characters.Peach);
-            dialogueSystem.AddDialogue("Thank you your highness, you have done enough now. If i have more questions I will come back to you.", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("(I should talk to the suspects and look around for the murder weapon)", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("Talk to Hammer bro if you found out who did it. He will be the final judge", Characters.Narrator);
+            dialogueSystem.AddDialogue("Thank you your highness, you have \ndone enough now", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("If i have more questions I will come \nback to you", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("(I should talk to the suspects and \nlook around for the murder weapon)", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("Talk to Hammer bro if you found out \nwho did it", Characters.Narrator);
+            dialogueSystem.AddDialogue("He will be the final judge", Characters.Narrator);
             return dialogueSystem;
         }
 
