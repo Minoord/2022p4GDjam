@@ -51,7 +51,7 @@ namespace GameJam.Game
             dialogueSystem.AddDialogue("Who was standing next to Mario while the meeting was happening?", Characters.Shroomlock);
             dialogueSystem.AddDialogue("Me and Luigi..sniff...sniff", Characters.Peach);
             dialogueSystem.AddDialogue("Thank you your highness, you have done enough now. If i have more questions I will come back to you.", Characters.Shroomlock);
-            dialogueSystem.AddDialogue("( I should talk to the suspects and look around for the murder weapon)", Characters.Shroomlock);
+            dialogueSystem.AddDialogue("(I should talk to the suspects and look around for the murder weapon)", Characters.Shroomlock);
             dialogueSystem.AddDialogue("Talk to Hammer bro if you found out who did it. He will be the final judge", Characters.Narrator);
             return dialogueSystem;
         }

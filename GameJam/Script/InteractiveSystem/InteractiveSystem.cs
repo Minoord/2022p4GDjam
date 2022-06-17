@@ -33,6 +33,8 @@ namespace GameJam
             renderForm.PlayDialogue();
             foreach(var item in inventory.inventory)
             {
+                var isSecretItem = item.Key == "Suicide note";
+                if (isSecretItem) continue;
                 renderForm.menuDialogueItems.Add(item.Key);
             }
             foreach (var chara in world.characters)
