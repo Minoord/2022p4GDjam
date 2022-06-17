@@ -205,28 +205,28 @@ namespace GameJam.Game
                     break;
                 case "Lighter":
                     dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
-                    dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a lighter", Characters.Bowser);
-                    dialogueSystem.AddDialogue("It would have lit up the room and everybody would have seen it!", Characters.Bowser);
+                    dialogueSystem.AddDialogue("The murderer couldn't have possibly \nhave used a lighter", Characters.Bowser);
+                    dialogueSystem.AddDialogue("It would have lit up the room and \n everybody would have seen it!", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Pan":
                     dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
-                    dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a pan", Characters.Bowser);
-                    dialogueSystem.AddDialogue("Mario didn't have bruises or anything else that could have implemented", Characters.Bowser);
+                    dialogueSystem.AddDialogue("The murderer couldn't have possibly \nhave used a pan", Characters.Bowser);
+                    dialogueSystem.AddDialogue("Mario didn't have bruises or anything \nelse that could have implemented", Characters.Bowser);
                     dialogueSystem.AddDialogue("that he was hit with the pan!", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Coin":
                     dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
-                    dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a coin", Characters.Bowser);
-                    dialogueSystem.AddDialogue("Mario didn't have marks or anything else that could have implemented", Characters.Bowser);
+                    dialogueSystem.AddDialogue("The murderer couldn't have possibly \nhave used a coin", Characters.Bowser);
+                    dialogueSystem.AddDialogue("Mario didn't have marks or anything \nelse that could have implemented", Characters.Bowser);
                     dialogueSystem.AddDialogue("that he was murderd with the coin", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
                     break;
                 case "Gun":
                     dialogueSystem.AddDialogue("OBJECTION", Characters.Bowser);
-                    dialogueSystem.AddDialogue("The murderer couldn't have possibly have used a gun", Characters.Bowser);
-                    dialogueSystem.AddDialogue("if the murdrer used the gun a bullet should have been found", Characters.Bowser);
+                    dialogueSystem.AddDialogue("The murderer couldn't have possibly \nhave used a gun", Characters.Bowser);
+                    dialogueSystem.AddDialogue("if the murdrer used the gun a bullet \nshould have been found", Characters.Bowser);
                     DefeatDialogue(dialogueSystem);
                     break;
             }
