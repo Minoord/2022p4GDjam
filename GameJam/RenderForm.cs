@@ -34,6 +34,8 @@ namespace GameJam
 
         private int playerChoiceNumber = 0;
 
+        private int currentSpace = 5;
+
         public RenderForm()
         {
             InitializeComponent();
@@ -84,11 +86,17 @@ namespace GameJam
                 frames = gc.spriteMap.GetDialoguePosition(),
                 rectangle = new Rectangle(0, 80, 160, 40),
             };
-            
-            gc.Menu = new RenderObject()
+
+            gc.dialougueArrow = new RenderObject()
             {
-                frames = gc.spriteMap.GetDialoguePosition(),
-                rectangle = new Rectangle(112, 40, 50, 40),
+                frames = gc.spriteMap.GetDialogueArrow(),
+                rectangle = new Rectangle(117, currentSpace, 8, 8),
+            };
+
+            gc.menu = new RenderObject()
+            {
+                frames = gc.spriteMap.GetMenuPosition(),
+                rectangle = new Rectangle(112, 0, 50, 80),
             };
 
 
@@ -135,7 +143,6 @@ namespace GameJam
 
         public void inMenu(KeyEventArgs e)
         {
-            Console.WriteLine(renderer.menuOptions.Count +":"+  playerChoiceNumber);
             if (e.KeyCode == Keys.Return)
             {
                 playersChoices.Add(renderer.menuOptions[playerChoiceNumber]);
@@ -145,13 +152,26 @@ namespace GameJam
             else if (e.KeyCode == Keys.Up)
             {
                 playerChoiceNumber -= 1;
-                if (playerChoiceNumber < 0) playerChoiceNumber = renderer.menuOptions.Count - 1;
+                currentSpace -= 10;
+                if (playerChoiceNumber < 0)
+                {
+                    playerChoiceNumber = renderer.menuOptions.Count - 1;
+                    currentSpace = 65;
+                }
+                gc.dialougueArrow.rectangle = new Rectangle(117, currentSpace, 8, 8);
             }
             else if (e.KeyCode == Keys.Down)
             {
                 playerChoiceNumber += 1;
-                if (playerChoiceNumber >= renderer.menuOptions.Count) playerChoiceNumber = 0;
+                currentSpace += 10;
+                if (playerChoiceNumber >= renderer.menuOptions.Count)
+                {
+                    playerChoiceNumber = 0;
+                    currentSpace = 5;
+                }
+                gc.dialougueArrow.rectangle = new Rectangle(117, currentSpace, 8, 8);
             }
+            Console.WriteLine(renderer.menuOptions.Count + ":" + renderer.menuOptions[playerChoiceNumber]);
         }
 
         public void PlayDialogue()
@@ -181,6 +201,7 @@ namespace GameJam
                 renderer.isRenderingMenu = true;
                 isInMenu = true;
                 playerChoiceNumber = 0;
+                gc.dialougueArrow.rectangle = new Rectangle(117, 5, 8, 8);
             }
             else if( dialogue == "ENDDIA")
             {

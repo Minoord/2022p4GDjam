@@ -61,7 +61,8 @@ namespace GameJam.Game
             RenderObject(g, context.dialougue);
             RenderDialogue(g, dialogue);
             if (!isRenderingMenu) return;
-            RenderObject(g, context.Menu);
+            RenderObject(g, context.menu);
+            RenderObject(g, context.dialougueArrow);
             RenderMenu(g, menuOptions);
         }
 
@@ -81,7 +82,7 @@ namespace GameJam.Game
             g.DrawImage(image, renderObject.rectangle, renderObject.frames[(int)renderObject.frame], GraphicsUnit.Pixel);
             renderObject.MoveFrame(frametime);
         }
-        
+
         private void RenderMenu(Graphics g, List<string> list)
         {
             if (list == null || list.Count <= 0)
@@ -89,13 +90,13 @@ namespace GameJam.Game
                 isRenderingMenu = false;
                 return;
             }
-            var height = 20;
+            var height = -15;
             var currentspace = height + 10;
             foreach (var strings in list)
             {
                 currentspace += 10;
 
-                g.DrawString(strings, font, colourBrush, new Point(115, currentspace));
+                g.DrawString(strings, font, colourBrush, new Point(127, currentspace));
             }
         }
         private void RenderDialogue(Graphics g, string dialogue)
